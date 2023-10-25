@@ -1,0 +1,12 @@
+# 应用服务 WEB 访问端口
+server:
+  port: 8099
+  servlet:
+    context-path: /dv
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://101.132.188.137:3306/ding_video?serverTimezoneUTC&useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: Dase1101
