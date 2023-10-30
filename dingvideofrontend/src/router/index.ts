@@ -17,6 +17,24 @@ const routes: Array<RouteRecordRaw> = [
       title: '首页',
       keepAlive: true,
     },
+  },
+  {
+    path: '/calculate',
+    name: 'calculate',
+    component: () => import('@/views/home/test.vue'),
+    meta: {
+      title: '计算器',
+      keepAlive: true,
+    },
+  },
+  {
+    path: '/video',
+    name: 'video',
+    component: () => import('@/views/home/video.vue'),
+    meta: {
+      title: '视频播放',
+      keepAlive: true,
+    },
   }
 ]
 
