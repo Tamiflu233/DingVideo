@@ -26,6 +26,16 @@ const routes: Array<RouteRecordRaw> = [
       title: '视频测试',
       keepAlive: true,
     },
+  },
+  {
+
+    path: '/swipe',
+    name: 'swipe',
+    component: () => import('@/views/swipetest/index.vue'),
+    meta: {
+      title: '轮播测试',
+      keepAlive: true,
+    },
   }
 ]
 
