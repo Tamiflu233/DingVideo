@@ -17,6 +17,15 @@ const routes: Array<RouteRecordRaw> = [
       title: '首页',
       keepAlive: true,
     },
+  },
+  {
+    path: '/demo',
+    name: 'demo',
+    component: () => import('@/views/home/demo.vue'),
+    meta: {
+      title: '测试',
+      keepAlive: true,
+    },
   }
 ]
 
