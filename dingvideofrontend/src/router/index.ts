@@ -14,23 +14,23 @@ const routes: Array<RouteRecordRaw> = [
     name: 'home',
     component: () => import('@/views/home/index.vue'),
     meta: {
-      title: '首页',
+      title: '登录',
       keepAlive: true,
     },
   },
   {
-    path: '/calculate',
-    name: 'calculate',
-    component: () => import('@/views/home/test.vue'),
+    path: '/login',
+    name: 'login',
+    component: () => import('@/views/login/login.vue'),
     meta: {
-      title: '计算器',
+      title: '登录',
       keepAlive: true,
     },
   },
   {
-    path: '/video',
-    name: 'video',
-    component: () => import('@/views/home/video.vue'),
+    path: '/input',
+    name: 'input',
+    component: () => import('@/views/home/input.vue'),
     meta: {
       title: '视频播放',
       keepAlive: true,
