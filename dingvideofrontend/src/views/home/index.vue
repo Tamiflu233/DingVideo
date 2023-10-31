@@ -136,7 +136,14 @@ onUnmounted(() => {
     font-size: 1rem;
   }
 
-  ::v-deep .video-js {
+  :deep .video-js {
+    .vjs-paused {
+      .vjs-has-started {
+        .vjs-big-play-button {
+          display: block !important;
+        }
+      }
+    }
     .vjs-control-bar {
       width: 98%;
       margin: 15px auto;
@@ -149,4 +156,24 @@ onUnmounted(() => {
     }
   }
 
+  :deep .video-js {
+
+    .vjs-big-play-button {
+      font-size: 2.5em;
+      line-height: 2.3em;
+      height: 2.5em;
+      width: 2.5em;
+      -webkit-border-radius: 2.5em;
+      -moz-border-radius: 2.5em;
+      border-radius: 2.5em;
+      background-color: #73859f;
+      background-color: rgba(115,133,159,.5);
+      border-width: 0.15em;
+      margin-top: -1.25em;
+      margin-left: -1.75em;
+      .vjs-icon-placeholder {
+        font-size: 1.63em;
+      }
+    }
+  }
 </style>

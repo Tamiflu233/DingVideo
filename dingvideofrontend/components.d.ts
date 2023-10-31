@@ -17,10 +17,11 @@ declare module 'vue' {
     ElMain: typeof import('element-plus/es')['ElMain']
     ElOption: typeof import('element-plus/es')['ElOption']
     ElSelect: typeof import('element-plus/es')['ElSelect']
+    MyVideo: typeof import('./src/components/MyVideo/index.vue')['default']
     NavHeader: typeof import('./src/components/common/NavHeader.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    TestVideo: typeof import('./src/components/MyVideo/index.vue')['default']
     SideMenu: typeof import('./src/components/common/SideMenu.vue')['default']
+    TestVideo: typeof import('./src/components/MyVideo/index.vue')['default']
   }
 }
