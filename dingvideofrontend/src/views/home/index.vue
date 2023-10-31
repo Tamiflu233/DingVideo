@@ -1,18 +1,89 @@
 #index.vue页面
 <template>
-  <h2>{{ msg }}</h2>
-  <h2>{{ count }}</h2>
-  <button @click="count++">点我count++</button>
-    <router-link to="/calculate">
-      <button>点我跳转到计算器</button>
-    </router-link>
-  </template>
+  <div class="home-layout">
+    <el-container class="home-content">
+      <el-aside class="cate-sidebar" width="100px">
+        <SideMenu :items="menuItems"  />
+      </el-aside>
+      <el-container class="main-part">
+        <el-header class="head-bar">Header</el-header>
+        <el-main class="video-pageview">Main</el-main>
+      </el-container>
+    </el-container>
+  </div>
+</template>
 <script setup lang="ts">
 import { ref } from 'vue'
+import { MenuItem } from "@/types/sidemenu"
+const SideMenu = defineAsyncComponent(() => import("@/components/common/SideMenu.vue"))
+// 左侧菜单分类按钮列表,是对象数组，每个对象包含icon和title两个属性
 
-const msg = ref('10.26 祝程哥新婚快乐！祝崔里青生日快乐！')
-const count = ref(710)
+const menuItems = ref<MenuItem[]>([
+  {
+    icon: "house",
+    title: "首页",
+  },
+  {
+    icon: "star",
+    title: "推荐",
+  },
+  {
+    icon: "trophy",
+    title: "热门",
+  },
+  {
+    icon: "football",
+    title: "体育",
+  },
+  {
+    icon: "reading",
+    title: "知识",
+  },
+  {
+    icon: "SwitchFilled",
+    title: "游戏",
+  },
+  {
+    icon: "MagicStick",
+    title: "娱乐",
+  },
+  {
+    icon: "food",
+    title: "美食",
+  },
+  {
+    icon: "VideoCameraFilled",
+    title: "电影",
+  },
+  {
+    icon: "ShoppingBag",
+    title: "时尚",
+  },
+  {
+    icon: "promotion",
+    title: "动漫",
+  },
+]);
 </script>
 
-<style scoped>
+
+<style lang="scss" scoped>
+.home-layout{
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: absolute;
+  height: 100%;
+  .home-content{
+    height: 100%;
+  .cate-sidebar {
+  // background-color: gray;
+}
+
+.head-bar {
+  background-color: blue;
+}
+}
+}
 </style>

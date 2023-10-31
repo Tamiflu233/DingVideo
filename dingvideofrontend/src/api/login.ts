@@ -12,6 +12,7 @@ export const getLogin: requestModel = () => request({
 export const getUserInfo: requestModel = () => request({
   url: '/info',
   method: 'get',
+  
 });
 
 // 退出登录
