@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 
-
 const history = createWebHistory()
 const routes: Array<RouteRecordRaw> = [
   {
@@ -19,11 +18,12 @@ const routes: Array<RouteRecordRaw> = [
     },
   },
   {
-    path: '/demo',
-    name: 'demo',
-    component: () => import('@/views/home/demo.vue'),
+
+    path: '/test',
+    name: 'test',
+    component: () => import('@/views/videotest/index.vue'),
     meta: {
-      title: '测试',
+      title: '视频测试',
       keepAlive: true,
     },
   }
