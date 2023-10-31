@@ -20,6 +20,7 @@
   },
   "devDependencies": {
     "@types/node": "^20.8.8",
+    "@types/video.js": "^7.3.55",
     "@vitejs/plugin-vue": "^4.2.3",
     "axios": "^1.5.1",
     "sass": "^1.69.4",

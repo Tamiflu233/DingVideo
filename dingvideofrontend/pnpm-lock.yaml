@@ -1,5 +1,9 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
 dependencies:
   '@element-plus/icons-vue':
     specifier: ^2.1.0
@@ -30,6 +34,9 @@ devDependencies:
   '@types/node':
     specifier: ^20.8.8
     version: registry.npmmirror.com/@types/node@20.8.8
+  '@types/video.js':
+    specifier: ^7.3.55
+    version: registry.npmmirror.com/@types/video.js@7.3.55
   '@vitejs/plugin-vue':
     specifier: ^4.2.3
     version: registry.npmmirror.com/@vitejs/plugin-vue@4.2.3(vite@4.4.5)(vue@3.3.4)
@@ -542,6 +549,12 @@ packages:
     version: 20.8.8
     dependencies:
       undici-types: registry.npmmirror.com/undici-types@5.25.3
+    dev: true
+
+  registry.npmmirror.com/@types/video.js@7.3.55:
+    resolution: {integrity: sha512-uMHaGOM3D6KBFedNUXpGsv6e5R0FSZAk9B4KSxwFV7FN6w/XSfc5JSyvQ4zR6vvcDEV9ofyMpKfqybDvCluknQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/video.js/-/video.js-7.3.55.tgz}
+    name: '@types/video.js'
+    version: 7.3.55
     dev: true
 
   registry.npmmirror.com/@types/web-bluetooth@0.0.16:
