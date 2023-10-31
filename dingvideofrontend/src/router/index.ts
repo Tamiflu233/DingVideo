@@ -26,15 +26,6 @@ const routes: Array<RouteRecordRaw> = [
       title: '登录',
       keepAlive: true,
     },
-  },
-  {
-    path: '/input',
-    name: 'input',
-    component: () => import('@/views/home/input.vue'),
-    meta: {
-      title: '视频播放',
-      keepAlive: true,
-    },
   }
 ]
 

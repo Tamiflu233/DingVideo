@@ -20,5 +20,6 @@ declare module 'vue' {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SideMenu: typeof import('./src/components/common/SideMenu.vue')['default']
+    ValidCode: typeof import('./src/components/common/ValidCode.vue')['default']
   }
 }
