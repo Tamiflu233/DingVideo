@@ -35,18 +35,23 @@ public class UserController {
      */
     @PostMapping("/login")
     public ResponseResult login(@Validated @RequestBody UserLogin userLogin) {
-        User user = userService.login(userLogin);
-        UserResponse userResponse = UserMapper.INSTANCE.userToUserResponse(user);
-        String token = userService.createToken(userLogin);
-        ResponseResult result = new ResponseResult();
         Map<String, Object> data = new HashMap<>();
-        data.put("userInfo", userResponse);
-        data.put("token", token);
-        result.setData(data);
-        // 将用户信息放入security的token中
-        UsernamePasswordAuthenticationToken authenticateToken = new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword(), null);
-        SecurityContextHolder.getContext().setAuthentication(authenticateToken);
-        return result;
+
+        try {
+            User user = userService.login(userLogin);
+            UserResponse userResponse = UserMapper.INSTANCE.userToUserResponse(user);
+            String token = userService.createToken(userLogin);
+            ResponseResult result = new ResponseResult();
+            data.put("userInfo", userResponse);
+            data.put("token", token);
+            // 将用户信息放入security的token中
+            UsernamePasswordAuthenticationToken authenticateToken = new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword(), null);
+            SecurityContextHolder.getContext().setAuthentication(authenticateToken);
+            return ResponseResult.success("登录成功",data);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseResult.error("登陆失败");
+        }
     }
 
 }

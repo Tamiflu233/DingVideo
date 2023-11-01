@@ -46,6 +46,7 @@ import ValidCode from '@/components/common/ValidCode.vue'
 import { ElMessage } from 'element-plus'
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
+import { getLogin } from '@/api/login'
 
 //获取路由器
 let $router = useRouter()
@@ -77,20 +78,40 @@ const refreshCode = () => {
 }
 //登录
 const login = () => {
-  //验证验证码不为空
-  if (!sidentifyMode.value) {
-    ElMessage({ type: 'error', message: '验证码不能为空！' })
-    return
-  }
-  //验证验证码是否正确
-  if (sidentifyMode.value != identifyCode.value) {
-    ElMessage({ type: 'error', message: '验证码错误' })
-    refreshCode()
-    return
-  } else {
-    ElMessage({ type: 'success', message: '登录成功' })
-    $router.push('/home')
-  }
+    // 用户名或密码不能为空
+    if(!user.username || !user.password) {
+        ElMessage({ type: 'error', message: '用户名或密码不能为空！' })
+        return
+    }
+    //验证验证码不为空
+    if (!sidentifyMode.value) {
+        ElMessage({ type: 'error', message: '验证码不能为空！' })
+        return
+    }
+    //验证验证码是否正确
+    if (sidentifyMode.value != identifyCode.value) {
+        ElMessage({ type: 'error', message: '验证码错误！' })
+        refreshCode()
+        return
+    } else {
+        getLogin(user).then((res) => {
+            console.log(res);
+            if(res.code == 200) {
+                ElMessage({ type: 'success', message: '登录成功！' })           
+                localStorage.setItem('token', res.data.token)
+                $router.push('/home')
+            } else {
+                ElMessage({ type: 'error', message: '用户名或密码错误！' })
+            }
+            
+
+        }).catch((err) => {
+            ElMessage({ type: 'error', message: err })
+            
+        })
+        
+    }
+    
 }
 
 

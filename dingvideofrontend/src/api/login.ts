@@ -2,10 +2,16 @@ import request from '@/utils/request';
 import { requestModel } from '@/types/service';
 
 // 获取用户信息
-export const getLogin: requestModel = () => request({
-    url: '/login',
-    method: 'get',
-  });
+import { LoginForm } from '@/types/login';
+const baseUrl:string = "/api/user"
+export const getLogin: requestModel = (data?: any) => request({
+  url: `${baseUrl}/login`,
+  method: 'post',
+  data: {
+    "username": data?.username,
+    "password": data?.password
+  }
+});
 
   
 // 获取用户信息
