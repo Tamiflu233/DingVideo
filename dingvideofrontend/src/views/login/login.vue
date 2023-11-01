@@ -1,5 +1,5 @@
 <template>
-    <div style="height:100vh; display: flex; align-items: center; justify-content: center; background-color: #76d7ea">
+    <div class="login-wrapper" style="height:100vh; display: flex; align-items: center; justify-content: center; background-color: #76d7ea">
         <div style="display: flex; background-color: white; width: 50%; border-radius: 5px; overflow: hidden">
             <div style="flex: 1; display: flex; align-items: center; justify-content: center;">
                 <img src="@/assets/img/login.png" alt="" style="width: 90%; height: 90%;">
@@ -105,6 +105,13 @@ const user = reactive({
 </script>
 
 <style>
+.login-wrapper {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: absolute;
+}
 .el-input__inner::placeholder {
     font-size: 10px;
 }
