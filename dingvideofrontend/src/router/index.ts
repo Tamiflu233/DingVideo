@@ -13,7 +13,16 @@ const routes: Array<RouteRecordRaw> = [
     name: 'home',
     component: () => import('@/views/home/index.vue'),
     meta: {
-      title: '首页',
+      title: '登录',
+      keepAlive: true,
+    },
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: () => import('@/views/login/login.vue'),
+    meta: {
+      title: '登录',
       keepAlive: true,
     },
   },
