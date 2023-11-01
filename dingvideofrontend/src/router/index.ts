@@ -12,9 +12,18 @@ const routes: Array<RouteRecordRaw> = [
     path: '/home',
     name: 'home',
     component: () => import('@/views/home/index.vue'),
+    children: [
+      {
+        path: '',
+        component: () => import('@/views/home/RecommendVideos/RecommendVideos.vue'),
+      },
+      {
+        path: 'category',
+        component: () => import('@/views/home/Category/CategoryVideos.vue'),
+      }
+    ],
     meta: {
-      title: '登录',
-      keepAlive: true,
+      title: '首页',
     },
   },
   {
@@ -23,7 +32,6 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('@/views/login/login.vue'),
     meta: {
       title: '登录',
-      keepAlive: true,
     },
   },
   {
@@ -33,7 +41,6 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('@/views/videotest/index.vue'),
     meta: {
       title: '视频测试',
-      keepAlive: true,
     },
   },
   {
@@ -43,7 +50,15 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('@/views/swipetest/index.vue'),
     meta: {
       title: '轮播测试',
-      keepAlive: true,
+    },
+  },
+  {
+
+    path: '/detail',
+    name: 'detail',
+    component: () => import('@/views/detail/VideoDetail.vue'),
+    meta: {
+      title: '视频观看',
     },
   }
 ]
@@ -52,5 +67,8 @@ const router = createRouter({
   history,
   routes
 })
-
+router.beforeEach((to, from, next) => {
+  document.title = to.meta.title as string
+  next()
+})
 export default router
