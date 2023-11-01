@@ -80,10 +80,11 @@ onMounted(() => {
   margin-top: -1.25em !important;
   margin-left: -1.75em !important;
 }
-/* 中间的播放箭头 */
-.vjs-big-play-button .vjs-icon-placeholder {
-  font-size: 1.63em !important;
-}
+/*导致controlBar的零件超出的原因 */
+/*!* 中间的播放箭头 *!*/
+/*.vjs-big-play-button .vjs-icon-placeholder {*/
+/*  font-size: 1.23em !important;*/
+/*}*/
 .video-js .vjs-time-control {
   display: block !important;
 }

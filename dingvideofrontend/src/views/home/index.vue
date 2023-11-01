@@ -12,7 +12,149 @@
         <el-main class="video-pageview">
           <van-swipe ref="videoSwipe" class="my-swipe" :show-indicators="false" vertical :touchable="true" @drag-start="onDragStart" @drag-end="onDragEnd" @change="onChange">
             <van-swipe-item>
-              <video ref="videoPlayer1" class="video-js" style="margin: auto auto"></video>
+              <div style="border-radius: 0.8rem;background-color:#ffffff;">
+                <el-row :gutter="50">
+                  <!-- 图片区 -->
+                  <el-col :span="50">
+                    <div class="banner">
+                      <video ref="videoPlayer1" class="video-js vjs-big-play-button" style="margin: auto auto"></video>
+                    </div>
+                  </el-col>
+<!--                  <el-col :span="50" style="box-shadow:inset 0 -3em 3em rgba(0, 0, 0, 0.05)">-->
+                  <el-col :span="50">
+                    <div class="info" style="width: 500px;margin-top: 10px;">
+                      <!-- 卡片头部 -->
+                      <el-row style="align-items: center;width: 500px;">
+<!--                        <a :href="`/user/index/${detail.user.id}`">-->
+                        <a>
+<!--                          <el-avatar :src="detail.user.avatar" size="large"/>-->
+                          <el-avatar src="https://cdn.jsdelivr.net/gh/Tamiflu233/AssetsRepo/img/Avatar.jpg" size="large"/>
+                        </a>
+<!--                        <div class="username">{{ }}</div>-->
+                        <div class="username">111</div>
+<!--                        <button @click="cancelFocusOn(detail.user.id)" class="focusOn" v-if="checkFollow(detail.user.id)">已关注-->
+                        <button class="focusOn" v-if=true>已关注
+                        </button>
+                        <button class="focusOn" v-else @click="doFocusOn(detail.user.id)">关注</button>
+                      </el-row>
+                      <!-- 卡片头部结束 -->
+                      <div class="main-content">
+                        <!-- 卡片内容 -->
+                        <el-row style="margin-top: 20px;">
+<!--                          <h2>{{ detail.title }}</h2>-->
+                          <h2>detail.title</h2>
+                        </el-row>
+                        <el-row>
+<!--                          <div class="content">{{ detail.content }}</div>-->
+                          <div class="content">detail.content</div>
+                        </el-row>
+                        <el-row>
+<!--                          <time class="time">{{ detail.createTime }}</time>-->
+                          <time class="time">detail.createTime</time>
+                        </el-row>
+                        <!-- 卡片内容结束 -->
+                        <hr/>
+<!--                         评论区 -->
+                        <div class="comments" v-if="comments" v-infinite-scroll="load" :infinite-scroll-disabled="disabled">
+                          <el-empty description="现在还没有评论" v-if="comments.length === 0"/>
+                          <div v-else class="commentBox">
+                            <div class="commentTitle" style="margin-bottom: 5px;">共{{ detail.commentCount }}条评论</div>
+                            <div v-for="item in comments" :key="item.id">
+                              <el-row :gutter="20">
+                                <el-col :span="2.5">
+                                  <a :href="`/user/index/${item.user.id}`">
+                                    <el-avatar :src="item.user.avatar" :size="30"></el-avatar>
+                                  </a>
+                                </el-col>
+                                <el-col :span="20" style="font-size: 14px">
+                                  <div style="color:#33333399;">{{ item.user.username }}</div>
+                                  <div style="color:#333333;margin-top: 2px;margin-bottom: 5px;">{{ item.content }}</div>
+                                  <time class="time">{{ item.createTime }}</time>
+                                  <el-icon style="float: right;font-size: medium" @click="commentMain(item)">
+                                    <ChatRound/>
+                                  </el-icon>
+                                </el-col>
+                                <el-col style="margin-top: 5px;">
+                                  <div v-for="reply in item.replies" :key="reply.id" style="margin-left: 30px">
+                                    <!-- 渲染子评论的内容 -->
+                                    <el-row :gutter="20">
+                                      <el-col :span="2.5">
+                                        <a :href="`/user/index/${reply.user.id}`">
+                                          <el-avatar :src="reply.user.avatar" :size="25"></el-avatar>
+                                        </a>
+                                      </el-col>
+                                      <el-col :span="20" style="font-size: 12px">
+                                        <div style="color:#33333399;">{{ reply.user.username }}</div>
+                                        <div style="color:#333333;margin-top: 2px;margin-bottom: 10px;">{{ reply.content }}</div>
+                                        <time class="time">{{ reply.createTime }}</time>
+                                      </el-col>
+                                    </el-row>
+                                  </div>
+                                  <div class="more" @click="loadReply(item)" v-if="item.replyCount > 0">展开{{
+                                      item.replyCount
+                                    }}条回复
+                                  </div>
+                                </el-col>
+                              </el-row>
+                              <el-divider/>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- 评论区结束 -->
+                      <el-divider/>
+                    </div>
+                    <div class="bottomArea">
+                      <div class="buttonArea">
+                        <el-row>
+                          <el-button link class="warp" @click="doSomething('like', detail)" :disabled="review">
+                            <svg x="1689147877558" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                 xmlns="http://www.w3.org/2000/svg" p-id="3345" width="25" height="25">
+<!--                              <path-->
+<!--                                  d="M512 901.746939c-13.583673 0-26.122449-4.179592-37.093878-13.061225-8.881633-7.314286-225.697959-175.020408-312.424489-311.379592C133.746939 532.37551 94.040816 471.24898 94.040816 384.522449c0-144.718367 108.146939-262.269388 240.326531-262.269388 67.395918 0 131.657143 30.82449 177.632653 84.636735 45.453061-54.334694 109.191837-84.636735 177.110204-84.636735 132.702041 0 240.326531 117.55102 240.326531 262.269388 0 85.159184-37.093878 143.673469-67.395919 191.216327l-1.044898 1.567346c-86.726531 136.359184-303.542857 304.587755-312.424489 311.379592-10.44898 8.359184-22.987755 13.061224-36.571429 13.061225z"-->
+<!--                                  :fill="!checkFavorite(detail.id)?'#cecccc':'#d81e06'" p-id="3346"></path>-->
+                              <path
+                                  d="M512 901.746939c-13.583673 0-26.122449-4.179592-37.093878-13.061225-8.881633-7.314286-225.697959-175.020408-312.424489-311.379592C133.746939 532.37551 94.040816 471.24898 94.040816 384.522449c0-144.718367 108.146939-262.269388 240.326531-262.269388 67.395918 0 131.657143 30.82449 177.632653 84.636735 45.453061-54.334694 109.191837-84.636735 177.110204-84.636735 132.702041 0 240.326531 117.55102 240.326531 262.269388 0 85.159184-37.093878 143.673469-67.395919 191.216327l-1.044898 1.567346c-86.726531 136.359184-303.542857 304.587755-312.424489 311.379592-10.44898 8.359184-22.987755 13.061224-36.571429 13.061225z"
+                                  :fill="'#cecccc'" p-id="3346"></path>
+                            </svg>
+<!--                            <el-text size="large" tag="b" type="info">{{ detail.likeCount }}</el-text>-->
+                            <el-text size="large" tag="b" type="info">999</el-text>
+                          </el-button>
+                          <el-button link class="warp" @click="doSomething('collect', detail)" :disabled="review">
+                            <svg x="1689148085763" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                 style="margin-bottom: 4px;"
+                                 xmlns="http://www.w3.org/2000/svg" p-id="4912" width="25" height="25">
+<!--                              <path-->
+<!--                                  d="M512.009505 25.054894l158.199417 320.580987 353.791078 51.421464L767.995248 646.579761l60.432101 352.365345-316.417844-166.354615-316.436854 166.354615 60.432101-352.365345L0 397.057345l353.791078-51.421464z"-->
+<!--                                  :fill="!checkCollect(detail.id)?'#cecccc':'#f4ea2a'" p-id="4913"></path>-->
+                              <path
+                                  d="M512 901.746939c-13.583673 0-26.122449-4.179592-37.093878-13.061225-8.881633-7.314286-225.697959-175.020408-312.424489-311.379592C133.746939 532.37551 94.040816 471.24898 94.040816 384.522449c0-144.718367 108.146939-262.269388 240.326531-262.269388 67.395918 0 131.657143 30.82449 177.632653 84.636735 45.453061-54.334694 109.191837-84.636735 177.110204-84.636735 132.702041 0 240.326531 117.55102 240.326531 262.269388 0 85.159184-37.093878 143.673469-67.395919 191.216327l-1.044898 1.567346c-86.726531 136.359184-303.542857 304.587755-312.424489 311.379592-10.44898 8.359184-22.987755 13.061224-36.571429 13.061225z"
+                                  :fill="'#f4ea2a'" p-id="3346"></path>
+                            </svg>
+<!--                            <el-text size="large" tag="b" type="info">{{ detail.collectCount }}</el-text>-->
+                            <el-text size="large" tag="b" type="info">999</el-text>
+                          </el-button>
+                          <el-button link class="warp" @click="clearReply">
+                            <svg x="1689148939874" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                 xmlns="http://www.w3.org/2000/svg" p-id="6375" width="25" height="25">
+                              <path
+                                  d="M512 0C226.742857 0 0 197.485714 0 446.171429c0 138.971429 73.142857 270.628571 190.171429 351.085714L190.171429 1024l226.742857-138.971429c29.257143 7.314286 65.828571 7.314286 95.085714 7.314286 285.257143 0 512-197.485714 512-446.171429C1024 197.485714 797.257143 0 512 0zM256 512C219.428571 512 190.171429 482.742857 190.171429 446.171429S219.428571 380.342857 256 380.342857c36.571429 0 65.828571 29.257143 65.828571 65.828571S292.571429 512 256 512zM512 512C475.428571 512 446.171429 482.742857 446.171429 446.171429S475.428571 380.342857 512 380.342857c36.571429 0 65.828571 29.257143 65.828571 65.828571S548.571429 512 512 512zM768 512C731.428571 512 702.171429 482.742857 702.171429 446.171429s29.257143-65.828571 65.828571-65.828571c36.571429 0 65.828571 29.257143 65.828571 65.828571S804.571429 512 768 512z"
+                                  p-id="6376" fill="#cecccc"></path>
+                            </svg>
+<!--                            <el-text size="large" tag="b" type="info">{{ detail.commentCount }}</el-text>-->
+                            <el-text size="large" tag="b" type="info">999</el-text>
+                          </el-button>
+                        </el-row>
+                      </div>
+                      <el-input
+                          v-model="content" class="comment-input my" type="text" placeholder="说点什么..." ref="commentInput"
+                          :prefix-icon="Edit" @keyup.enter="sendComment(detail, to)" clearable style="margin-top: 5px"
+                          :disabled="review"
+                      />
+                    </div>
+                  </el-col>
+                </el-row>
+              </div>
             </van-swipe-item>
             <van-swipe-item>
               <video ref="videoPlayer2" class="video-js" style="margin: auto auto"></video>
@@ -143,8 +285,32 @@ const videoSet = (index:number,playerId:number) => {
 let startIndex: number = 0;
 function onChange(index: number) {
   console.log("参数是"+index);
-  
-  
+
+  let currentVideoPlayer = myPlayer1
+  if(index == 1) {
+    currentVideoPlayer = myPlayer2
+    myPlayer1.value.pause()
+    myPlayer2.value.pause()
+    myPlayer3.value.pause()
+    console.log(myPlayer1.value.paused())
+    console.log(myPlayer2.value.paused())
+    console.log(myPlayer3.value.paused())
+  }
+  else if(index == 2) {
+    currentVideoPlayer = myPlayer3
+    myPlayer1.value.pause()
+    myPlayer2.value.pause()
+  }
+  else {
+    myPlayer2.value.pause()
+    myPlayer3.value.pause()
+  }
+
+  // 将当前视频播放器回到起始位置
+  if (currentVideoPlayer) {
+    currentVideoPlayer.value.currentTime(0);
+    currentVideoPlayer.value.play();
+  }
 }
 function onDragStart(args:{index: number}) {
   console.log("DragStart"+args.index);
@@ -222,6 +388,7 @@ onMounted(() => {
     // autoplay: true,
     controls: true,
     controlBar: {
+      playToggle: true,
       //音量条竖直
       volumePanel: {
           inline: false,
@@ -229,7 +396,7 @@ onMounted(() => {
         }
         // // 暂停按钮隐藏
     },
-    playbackRates: [0.5, 1, 1.5, 2]
+    playbackRates: [0.5, 0.75, 1, 1.5, 2]
   }, () => {
     // myPlayer.value.poster("https://rl.shuishan.net.cn/ef3005a0bc2f71ed90a40764a0fd0102/snapshots/358d95a124ff421382624687fe348c0c-00001.jpg")
     videoSet(0,1)
@@ -240,6 +407,7 @@ onMounted(() => {
     // autoplay: true,
     controls: true,
     controlBar: {
+      playToggle: true,
       //音量条竖直
       volumePanel: {
           inline: false,
@@ -247,7 +415,7 @@ onMounted(() => {
         }
         // // 暂停按钮隐藏
     },
-    playbackRates: [0.5, 1, 1.5, 2]
+    playbackRates: [0.5, 0.75, 1, 1.5, 2]
   }, () => {
     // myPlayer.value.poster("https://rl.shuishan.net.cn/ef3005a0bc2f71ed90a40764a0fd0102/snapshots/358d95a124ff421382624687fe348c0c-00001.jpg")
     videoSet(1,2)
@@ -264,7 +432,7 @@ onMounted(() => {
         }
         // // 暂停按钮隐藏
     },
-    playbackRates: [0.5, 1, 1.5, 2]
+    playbackRates: [0.5, 0.75, 1, 1.5, 2]
   }, () => {
     // myPlayer.value.poster("https://rl.shuishan.net.cn/ef3005a0bc2f71ed90a40764a0fd0102/snapshots/358d95a124ff421382624687fe348c0c-00001.jpg")
     videoSet(2,3)
@@ -284,6 +452,17 @@ onUnmounted(() => {
   }
 })
 
+const props = defineProps({
+  detail: {
+    type: Object,
+    required: true,
+  },
+  review: {
+    type: Boolean,
+    default: false
+  }
+})
+const comments = ref([])
 </script>
 
 
@@ -321,21 +500,45 @@ onUnmounted(() => {
     // text-align: center;
     // background-color: #39a9ed;
   }
+.vjs-paused .vjs-big-play-button,
+.vjs-paused.vjs-has-started .vjs-big-play-button {
+  display: block;
+}
+.video-js .vjs-big-play-button{
+  font-size: 2.5em !important;
+  line-height: 2.3em !important;
+  height: 2.5em !important;
+  width: 2.5em !important;
+  -webkit-border-radius: 2.5em !important;
+  -moz-border-radius: 2.5em !important;
+  border-radius: 2.5em !important;
+  background-color: #73859f;
+  background-color: rgba(115, 133, 159, 0.5) !important;
+  border-width: 0.15em !important;
+  margin-top: -1.25em !important;
+  margin-left: -1.75em !important;
+}
+.video-js .vjs-time-control {
+  display: block !important;
+}
+.video-js .vjs-remaining-time {
+  display: none !important;
+}
 .video-js {
     height: 100%;
-    width: 100%;
+    width: 80%;
     border-radius: 12px;
     font-size: 1rem;
   }
 
   :deep .video-js {
-    .vjs-paused {
-      .vjs-has-started {
-        .vjs-big-play-button {
-          display: block !important;
-        }
-      }
-    }
+    //.vjs-paused {
+    //  .vjs-has-started {
+    //    .vjs-big-play-button {
+    //      display: block !important;
+    //    }
+    //  }
+    //}
     .vjs-control-bar {
       width: 98%;
       margin: 15px auto;
@@ -345,7 +548,24 @@ onUnmounted(() => {
       .vjs-volume-vertical {
         border-radius: 12px 12px 0 0;
       }
+      .vjs-big-play-centered {
+
+      }
     }
+    //.vjs-big-play-button{
+    //font-size: 2.5em !important;
+    //line-height: 2.3em !important;
+    //height: 2.5em !important;
+    //width: 2.5em !important;
+    //-webkit-border-radius: 2.5em !important;
+    //-moz-border-radius: 2.5em !important;
+    //border-radius: 2.5em !important;
+    //background-color: #73859f;
+    //background-color: rgba(115, 133, 159, 0.5) !important;
+    //border-width: 0.15em !important;
+    //margin-top: -1.25em !important;
+    //margin-left: -1.75em !important;
+    //}
   }
 
   :deep .video-js {
@@ -371,4 +591,32 @@ onUnmounted(() => {
       }
     }
   }
+
+
+//新样式
+.banner {
+  height: 800px;
+  width: 1000px;
+  border-radius: 0.8rem;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.username {
+  margin-left: 15px;
+}
+
+.focusOn {
+  position: absolute;
+  right: 10px;
+  padding: 0.6rem 0.8rem;
+  color: white;
+  background-color: red;
+  border: 0;
+  border-radius: 0.8rem;
+}
+
+.focusOn:hover {
+  background-color: #fd5656;
+}
 </style>
