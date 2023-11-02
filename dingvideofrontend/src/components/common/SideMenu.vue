@@ -20,6 +20,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { MenuItem } from "@/types/sidemenu"
+import { useRouter } from "vue-router";
+// 路由控制
+const router = useRouter();
 // 应用图标链接：
 const logo = ref("https://dasex101-random-learning.oss-cn-shanghai.aliyuncs.com/image/dingvideoLOGO.png")
 // 接受自定义的分类按钮项
@@ -30,10 +33,31 @@ defineProps({
   }
 })
 // 当前选择的分类按钮项的索引
-const selected = ref(-1)
+const selected = ref(0)
+// 分类索引表
+let cateMap:string[] = [
+  'home',
+  'recommend',
+  'hot',
+  'sports',
+  'knowledge',
+  'game',
+  'entertainment',
+  'food',
+  'movie',
+  'fashion',
+  'animation'
+]
 // 获取当前点击的按钮索引
 function selectItem(index: number) {
   selected.value = index
+  if(index === 0) {
+    // 跳转到首页
+    router.push({path: '/'})
+  } else {
+    // 跳转到分类页面
+    router.push({path: '/home/category',query:{"kind":cateMap[index]}})
+  }
 }
 </script>
 <style lang="scss" scoped>
