@@ -45,7 +45,17 @@ const routes: Array<RouteRecordRaw> = [
       title: '轮播测试',
       keepAlive: true,
     },
-  }
+  },
+  {
+
+    path: '/user',
+    name: 'user',
+    component: () => import('@/views/user/index.vue'),
+    meta: {
+      title: '个人中心',
+      keepAlive: true,
+    },
+  },
 ]
 
 const router = createRouter({
