@@ -15,7 +15,7 @@
                     </el-form-item>
                     <el-form-item prop="validCode">
                         <div style="display: flex">
-                            <el-input size="medium" style="flex: 1" placeholder="请输入验证码" :prefix-icon="CircleCheck"></el-input>
+                            <el-input size="medium" style="flex: 1" placeholder="请输入验证码" v-model="sidentifyMode" clearable :prefix-icon="CircleCheck"></el-input>
                             <div style="flex: 1;" class="code" @click="refreshCode">
                             <ValidCode :identifyCode="identifyCode"></ValidCode>
                             </div>
