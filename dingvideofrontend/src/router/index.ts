@@ -35,6 +35,14 @@ const routes: Array<RouteRecordRaw> = [
     },
   },
   {
+    path: '/register',
+    name: 'register',
+    component: () => import('@/views/login/register.vue'),
+    meta: {
+      title: '注册',
+    },
+  },
+  {
 
     path: '/test',
     name: 'test',
