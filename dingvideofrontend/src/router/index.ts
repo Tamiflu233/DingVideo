@@ -68,7 +68,17 @@ const routes: Array<RouteRecordRaw> = [
     meta: {
       title: '视频观看',
     },
-  }
+  },
+  {
+
+    path: '/user',
+    name: 'user',
+    component: () => import('@/views/user/index.vue'),
+    meta: {
+      title: '个人中心',
+      keepAlive: true,
+    },
+  },
 ]
 
 const router = createRouter({
