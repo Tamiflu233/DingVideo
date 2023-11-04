@@ -3,10 +3,8 @@ package com.dataispower.dingvideobackend.controller;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.dataispower.dingvideobackend.dto.UserLogin;
-import com.dataispower.dingvideobackend.dto.UserRegister;
-import com.dataispower.dingvideobackend.dto.UserResponse;
-import com.dataispower.dingvideobackend.dto.ResponseResult;
+import com.dataispower.dingvideobackend.config.AuthenticationConfigConstants;
+import com.dataispower.dingvideobackend.dto.*;
 import com.dataispower.dingvideobackend.entity.User;
 import com.dataispower.dingvideobackend.mapper.UserMapper;
 import com.dataispower.dingvideobackend.service.interfaces.UserService;
@@ -20,7 +18,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
-
 /**
  * author:heroding
  * date:2023/10/31 21:02
@@ -28,7 +25,7 @@ import java.util.Map;
  **/
 
 @RestController
-@RequestMapping(value = "/api/user")
+@RequestMapping(value = AuthenticationConfigConstants.USER_API)
 public class UserController {
     @Autowired
     private UserService userService;
@@ -87,6 +84,23 @@ public class UserController {
         } catch (JWTDecodeException e) {
             e.printStackTrace();
             return ResponseResult.error("当前用户未登录");
+        }
+    }
+
+    /**
+     * 更新用户资料信息
+     * @param username
+     * @param userUpdate
+     * @return
+     */
+    @PutMapping("/update")
+    public ResponseResult update(@Validated @RequestBody String username, UserUpdate userUpdate) {
+        try {
+            User user = userService.updateUser(username, userUpdate);
+            return ResponseResult.success("用户信息更新成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseResult.error("用户信息更新失败");
         }
     }
 }

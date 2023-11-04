@@ -2,6 +2,7 @@ package com.dataispower.dingvideobackend.dto;
 
 import lombok.Data;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 /**
@@ -10,18 +11,18 @@ import javax.validation.constraints.NotBlank;
  * description：用户注册信息
  **/
 @Data
-public class UserRegister {
-    @NotBlank(message = "用户名不能为空")
-    private String username;
-
-    @NotBlank(message = "密码不能为空")
+public class UserUpdate {
     private String password;
 
     private String nickname;
-
+    @Email
     private String email;
 
     private String phone;
+
+    private String age;
+
+    private String Gender;
 
     private String avatar;
 }
