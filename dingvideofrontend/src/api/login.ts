@@ -23,8 +23,7 @@ export const getRegister: requestModel = (data?: any) => request({
     "password": data?.password,
     "nickname": data?.nickname,
     "email": data?.email,
-    "phone": data?.phone,
-    "avatar": data?.avatar
+    "phone": data?.phone
   }
 });
 

@@ -44,7 +44,18 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User register(UserRegister userRegister) {
-        return null;
+        if(existUser(userRegister.getUsername())) {
+            return null;
+        }
+        User user = new User();
+        user.setUsername(userRegister.getUsername());
+        user.setPassword(passwordEncoder.encode(userRegister.getPassword()));
+        user.setNickname(user.getNickname());
+        user.setEmail(userRegister.getEmail());
+        user.setPhone(userRegister.getPhone());
+        user.setAvatar("https://cdn.jsdelivr.net/gh/Tamiflu233/AssetsRepo/img/Avatar.jpg");
+        userRepository.save(user);
+        return user;
     }
 
     @Override
@@ -72,6 +83,11 @@ public class UserServiceImpl implements UserService {
                 .withSubject(user.getUsername())
                 .withExpiresAt(new Date(System.currentTimeMillis() + AuthenticationConfigConstants.EXPIRATION_TIME))
                 .sign(Algorithm.HMAC512(AuthenticationConfigConstants.SECRET.getBytes()));
+    }
+
+    @Override
+    public Boolean existUser(String username) {
+        return userRepository.getUserByUsername(username) != null;
     }
 
 }

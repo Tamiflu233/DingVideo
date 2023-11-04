@@ -24,4 +24,6 @@ public interface UserService extends UserDetailsService {
     User getCurrentUser();
     // 创建用户token信息
     String createToken(UserLogin userLogin);
+    // 判断当前用户是否存在
+    Boolean existUser(String username);
 }
