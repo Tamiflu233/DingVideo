@@ -10,9 +10,7 @@
           <NavHeader />
         </el-header>
         <el-main class="video-pageview">
-
           <router-view></router-view>
-
         </el-main>
       </el-container>
     </el-container>
@@ -74,17 +72,6 @@ const menuItems = ref<MenuItem[]>([
 ]);
 
 
-const props = defineProps({
-  detail: {
-    type: Object,
-    required: true,
-  },
-  review: {
-    type: Boolean,
-    default: false
-  }
-})
-const comments = ref([])
 </script>
 
 
