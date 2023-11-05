@@ -46,7 +46,9 @@ import { ElMessage } from 'element-plus'
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { getLogin } from '@/api/login'
-
+import { loginStore } from '@/store/login/login.ts'
+// 登录状态管理
+const store = loginStore()
 // 获取路由器
 let $router = useRouter()
 // 输入框验证码
@@ -102,6 +104,8 @@ const login = () => {
                 ElMessage({ type: 'success', message: '登录成功！' })           
                 localStorage.setItem('token', res.data.token)
                 $router.push('/home')
+                store.setToken(res.data.token)
+                store.setUserInfo(res.data.userInfo)
             } else {
                 ElMessage({ type: 'error', message: '用户名或密码错误！' })
             }

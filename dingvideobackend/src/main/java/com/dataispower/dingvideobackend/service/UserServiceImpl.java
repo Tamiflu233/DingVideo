@@ -55,7 +55,7 @@ public class UserServiceImpl implements UserService {
         user.setNickname(userRegister.getNickname());
         user.setEmail(userRegister.getEmail());
         user.setPhone(userRegister.getPhone());
-        user.setAvatar("https://cdn.jsdelivr.net/gh/Tamiflu233/AssetsRepo/img/Avatar.jpg");
+        user.setAvatar("https://dasex101-random-learning.oss-cn-shanghai.aliyuncs.com/image/tamiflu233.jpg");
         userRepository.save(user);
         return user;
     }

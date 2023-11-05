@@ -13,10 +13,13 @@
     </el-input>
     </div>
     <div class="login-btn">
-      <el-button color="#FF7542" type="login" :icon="User" @click="login">
+      <el-button v-if="store.token == null" color="#FF7542" type="login" :icon="User" @click="login">
         
         登录
       </el-button>
+      <LoginAvatar v-else >
+        
+      </LoginAvatar>
     </div>
   </div>
 </template>
@@ -26,6 +29,10 @@ import { User,Search } from '@element-plus/icons-vue'
 import { ref } from 'vue'
 const inputText = ref('')
 import { useRouter } from "vue-router";
+import { loginStore } from '@/store/login/login.ts'
+const LoginAvatar = defineAsyncComponent(() => import("@/components/common/LoginAvatar.vue"))
+// 登录状态管理
+const store = loginStore()
 // 路由控制
 const router = useRouter();
 function login() {
