@@ -1,39 +1,39 @@
 <template>
-  <div>
+  <div class="comment-card">
     <div class="info" style="width: 500px;margin-top: 10px;">
       <!-- 卡片头部 -->
       <el-row style="align-items: center;width: 500px;">
         <a :href="`/user/index/${detail.user.id}`">
           <!--                          <el-avatar :src="detail.user.avatar" size="large"/>-->
-          <el-avatar src="https://cdn.jsdelivr.net/gh/Tamiflu233/AssetsRepo/img/Avatar.jpg" size="large"/>
+          <el-avatar :size="70" src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png" size="large"></el-avatar>
         </a>
         <!--                        <div class="username">{{ }}</div>-->
-        <div class="username">111</div>
+        <div class="username">{{ detail.username }}</div>
         <!--                        <button @click="cancelFocusOn(detail.user.id)" class="focusOn" v-if="checkFollow(detail.user.id)">已关注-->
-        <button class="focusOn" v-if=true>已关注
+        <button class="focusOn"  v-if="isfocused" @click="doFocus">已关注
         </button>
-        <button class="focusOn" v-else @click="doFocusOn(detail.user.id)">关注</button>
+        <button class="focusOn" v-else @click="doFocus">关注</button>
       </el-row>
       <!-- 卡片头部结束 -->
       <div class="main-content">
         <!-- 卡片内容 -->
         <el-row style="margin-top: 20px;">
-          <!--                          <h2>{{ detail.title }}</h2>-->
-          <h2>detail.title</h2>
+          <h2>{{ detail.title }}</h2>
+          <!-- <h2>22</h2> -->
         </el-row>
         <el-row>
-          <!--                          <div class="content">{{ detail.content }}</div>-->
-          <div class="content">detail.content</div>
+          <div class="content">{{ detail.content }}</div>
+          <!-- <div class="content">33</div> -->
         </el-row>
         <el-row>
-          <!--                          <time class="time">{{ detail.createTime }}</time>-->
-          <time class="time">detail.createTime</time>
+          <time class="time">{{ detail.createTime }}</time>
+          <!-- <time class="time">44</time> -->
         </el-row>
         <!-- 卡片内容结束 -->
-        <hr/>
+        <hr class="sperator"/>
         <!--                         评论区 -->
         <div class="comments" v-if="comments" v-infinite-scroll="load" :infinite-scroll-disabled="disabled">
-          <el-empty description="现在还没有评论" v-if="comments.length === 0"/>
+          <el-empty class="empty-hint" description="现在还没有评论" v-if="comments.length === 0"/>
           <div v-else class="commentBox">
             <div class="commentTitle" style="margin-bottom: 5px;">共{{ detail.commentCount }}条评论</div>
             <div v-for="item in comments" :key="item.id">
@@ -78,12 +78,13 @@
           </div>
         </div>
       </div>
-      <!-- 评论区结束 -->
-      <el-divider/>
+      
     </div>
     <div class="bottomArea">
+      <!-- 评论区结束 -->
+      <el-divider/>
       <div class="buttonArea">
-        <el-row>
+        <el-row class="button-row">
           <el-button link class="warp" @click="doSomething('like', detail)" :disabled="review">
             <svg t="1698833950122" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4084" width="30" height="30">
               <path d="M621.674667 408.021333c16.618667-74.24 28.224-127.936 34.837333-161.194666C673.152 163.093333 629.941333 85.333333 544.298667 85.333333c-77.226667 0-116.010667 38.378667-138.88 115.093334l-0.586667 2.24c-13.728 62.058667-34.72 110.165333-62.506667 144.586666a158.261333 158.261333 0 0 1-119.733333 58.965334l-21.909333 0.469333C148.437333 407.808 106.666667 450.816 106.666667 503.498667V821.333333c0 64.8 52.106667 117.333333 116.394666 117.333334h412.522667c84.736 0 160.373333-53.568 189.12-133.92l85.696-239.584c21.802667-60.96-9.536-128.202667-70.005333-150.186667a115.552 115.552 0 0 0-39.488-6.954667H621.674667z"
@@ -122,9 +123,11 @@
 </template>
 
 <script setup>
-import {ref} from "vue";
-
-
+import { onMounted, onUnmounted,ref } from 'vue'
+const isfocused = ref(false)
+function doFocus() {
+  isfocused.value = !isfocused.value
+}
 const props = defineProps({
   detail: {
     type: Object,
@@ -134,6 +137,9 @@ const props = defineProps({
     type: Boolean,
     default: false
   }
+})
+onMounted(() => {
+  console.log(props.detail);
 })
 const comments = ref([])
 // 加载评论
@@ -154,6 +160,12 @@ const load = async () => {
 </script>
 
 <style scoped>
+.comment-card {
+  position: relative;
+  height: 100%;
+  width: 500px;
+  padding: 20px;
+}
 .banner {
   height: 800px;
   width: 1000px;
@@ -162,21 +174,46 @@ const load = async () => {
   margin-bottom: 10px;
 }
 
-.username {
-  margin-left: 15px;
-}
 
+.username {
+  margin-left: 20px;
+  color: rgb(136, 136, 136);
+  font-size: 18px;
+}
 .focusOn {
+  width: 90px;
+  height: 40px;
   position: absolute;
   right: 10px;
   padding: 0.6rem 0.8rem;
   color: white;
   background-color: red;
   border: 0;
-  border-radius: 0.8rem;
+  border-radius: 2.0rem;
 }
 
 .focusOn:hover {
   background-color: #fd5656;
+}
+.time {
+  margin: 20px 0 10px 0px;
+  font-size: 14px;
+  line-height: 120%;
+  color: #9F9F9F;
+}
+.sperator {
+  border-color: rgba(228, 225, 225, 0.2);
+}
+.button-row {
+  margin-bottom: 10px;
+}
+.empty-hint {
+  
+}
+.bottomArea {
+  position: absolute;
+  bottom: 60px;
+  left: 20px;
+  right: 20px;
 }
 </style>
