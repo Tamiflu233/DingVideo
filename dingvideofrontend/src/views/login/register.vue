@@ -6,7 +6,7 @@
             </div>
             <div style="flex: 1; display: flex; align-items: center; justify-content: center">
                 <el-form :model="user" style="width: 80%" status-icon :rules="rules" :size="formSize" ref="ruleFormRef">
-                    <div style="font-size: 15px; font-weight: bold; text-align: center; margin: 10px">欢迎注册DingVideo</div>
+                    <div style="font-size: 25px; font-weight: bold; text-align: center; margin: 10px">欢迎注册DingVideo</div>
                     <el-form-item label-postion="left" label=" " prop="username">
                         <el-input autofocus=true size="medium" placeholder="请输入用户名" v-model="user.username" :prefix-icon="User"></el-input>
                     </el-form-item>
@@ -24,7 +24,7 @@
                     </el-form-item>
                     <el-form-item label=" ">
                     <!-- <el-form-item label=" " prop="sidentifyMode" :rules="[{ required: false, message: '请输入验证码！', trigger: 'blur'}]"> -->
-                        <div style="display: flex">
+                        <div style="display: flex; margin-bottom: 10px;">
                             <el-input size="medium" style="flex: 1" placeholder="请输入验证码" v-model="sidentifyMode" clearable :prefix-icon="CircleCheck"></el-input>
                             <div style="flex: 1;" class="code" @click="refreshCode">
                             <ValidCode :identifyCode="identifyCode"></ValidCode>

@@ -6,7 +6,7 @@
             </div>
             <div style="flex: 1; display: flex; align-items: center; justify-content: center">
                 <el-form :model="user" style="width: 80%" status-icon>
-                    <div style="font-size: 15px; font-weight: bold; text-align: center; margin: 10px">欢迎登录DingVideo</div>
+                    <div style="font-size: 25px; font-weight: bold; text-align: center; margin: 10px">欢迎登录DingVideo</div>
                     <el-form-item prop="username">
                         <el-input autofocus=true size="medium" placeholder="请输入用户名" v-model="user.username" :prefix-icon="User"></el-input>
                     </el-form-item>
