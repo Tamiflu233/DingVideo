@@ -72,6 +72,7 @@ const VideoToolBar = defineAsyncComponent(() => import("@/components/common/Vide
 const VideoCardRight = defineAsyncComponent(() => import("@/components/common/VideoCardRight.vue"))
 // 评论
 const detail = reactive({
+  userId: 4,
   username: "原神",
   title: "测试标题",
   content: "测试内容",

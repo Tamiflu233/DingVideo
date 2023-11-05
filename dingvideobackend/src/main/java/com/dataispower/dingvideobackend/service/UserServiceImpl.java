@@ -70,6 +70,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User loadUserById(Integer id) throws UsernameNotFoundException {
+        User user = userRepository.getUserById(Long.valueOf(id));
+        if (user == null) {
+            throw new BusinessException(ErrorType.UNKNOWN_USERNAME);
+        }
+        return user;
+    }
+
+    @Override
     public User getCurrentUser() {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         return loadUserByUsername(username);
@@ -88,6 +97,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User searchUser(String username) {
+        return loadUserByUsername(username);
+    }
+
+    @Override
+    public User searchUserById(Integer id) {
+        return loadUserById(id);
+    }
     public Boolean existUser(String username) {
         return userRepository.getUserByUsername(username) != null;
     }
@@ -104,5 +121,4 @@ public class UserServiceImpl implements UserService {
         user.setGender(Gender.fromString(userUpdate.getGender()));
         return user;
     }
-
 }

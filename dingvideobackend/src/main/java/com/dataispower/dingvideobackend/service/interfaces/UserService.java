@@ -21,10 +21,15 @@ public interface UserService extends UserDetailsService {
     // 根据用户名获取当前用户信息
     @Override
     User loadUserByUsername(String username) throws UsernameNotFoundException;
+    // 根据用户id获取当前用户信息
+    User loadUserById(Integer id) throws UsernameNotFoundException;
     // 获取当前登录用户信息
     User getCurrentUser();
     // 创建用户token信息
     String createToken(UserLogin userLogin);
+    // 获取用户信息
+    User searchUser(String username);
+    User searchUserById(Integer id);
     // 判断当前用户是否存在
     Boolean existUser(String username);
     // 更新用户资料信息
