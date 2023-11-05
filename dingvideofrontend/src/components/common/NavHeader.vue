@@ -13,7 +13,7 @@
     </el-input>
     </div>
     <div class="login-btn">
-      <el-button color="#FF7542" type="login" :icon="User">
+      <el-button color="#FF7542" type="login" :icon="User" @click="login">
         
         登录
       </el-button>
@@ -25,6 +25,12 @@
 import { User,Search } from '@element-plus/icons-vue'
 import { ref } from 'vue'
 const inputText = ref('')
+import { useRouter } from "vue-router";
+// 路由控制
+const router = useRouter();
+function login() {
+  router.push("/login")
+}
 </script>
 <style lang="scss" scoped>
 .nav-header-wrapper {

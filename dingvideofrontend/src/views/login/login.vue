@@ -1,14 +1,14 @@
 <template>
     <div class="login-wrapper" style="height:100vh; display: flex; align-items: center; justify-content: center; background-color: #76d7ea">
-        <div style="display: flex; background-color: white; width: 50%; border-radius: 5px; overflow: hidden">
-            <div style="flex: 1; display: flex; align-items: center; justify-content: center;">
+        <div style="display: flex; background-color: white; width: 60%; border-radius: 5px; overflow: hidden">
+            <div @click.prevent style="flex: 1; display: flex; align-items: center; justify-content: center;">
                 <img src="@/assets/img/login.png" alt="" style="width: 90%; height: 90%;">
             </div>
             <div style="flex: 1; display: flex; align-items: center; justify-content: center">
-                <el-form :model="user" style="width: 80%">
-                    <div style="font-size: 20px; font-weight: bold; text-align: center; margin: 10px">欢迎登录DingVideo</div>
+                <el-form :model="user" style="width: 80%" status-icon>
+                    <div style="font-size: 25px; font-weight: bold; text-align: center; margin: 10px">欢迎登录DingVideo</div>
                     <el-form-item prop="username">
-                        <el-input size="medium" placeholder="请输入用户名" v-model="user.username" :prefix-icon="User"></el-input>
+                        <el-input autofocus=true size="medium" placeholder="请输入用户名" v-model="user.username" :prefix-icon="User"></el-input>
                     </el-form-item>
                     <el-form-item prop="password">
                         <el-input size="medium" show-password placeholder="请输入密码" v-model="user.password" :prefix-icon="Lock"></el-input>
@@ -26,7 +26,7 @@
                     </el-form-item>
                     <div style="display: flex">
                         <div style="flex: 1; font-size: 10px; text-align: left;">
-                            还没有账号？请<span style="color: #76d7ea; cursor: pointer">注册</span>
+                            还没有账号？请<span style="color: #76d7ea; cursor: pointer" @click="register">注册</span>
                         </div>
                         <div style="flex: 1; text-align: right; font-size: 10px;">
                             <span style="color: #76d7ea; cursor: pointer">忘记密码？</span>
@@ -42,18 +42,21 @@
 import { User } from '@element-plus/icons-vue'
 import { Lock } from '@element-plus/icons-vue'
 import { CircleCheck } from '@element-plus/icons-vue'
-import ValidCode from '@/components/common/ValidCode.vue'
 import { ElMessage } from 'element-plus'
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
+import { getLogin } from '@/api/login'
 
-//获取路由器
+// 获取路由器
 let $router = useRouter()
-let sidentifyMode = ref('') //输入框验证码
-let identifyCode = ref('') //图形验证码
-let identifyCodes = ref('1234567890abcdefjhijklinopqrsduvwxyz') //验证码出现的数字和字母
+// 输入框验证码
+let sidentifyMode = ref('') 
+//图形验证码
+let identifyCode = ref('') 
+// 验证码出现的数字和字母
+let identifyCodes = ref('1234567890abcdefjhijklinopqrsduvwxyz') 
  
-//组件挂载
+// 组件挂载
 onMounted(() => {
   identifyCode.value = ''
   makeCode(identifyCodes.value, 4)
@@ -75,30 +78,54 @@ const refreshCode = () => {
   identifyCode.value = ''
   makeCode(identifyCodes.value, 4)
 }
-//登录
+// 登录
 const login = () => {
-  //验证验证码不为空
-  if (!sidentifyMode.value) {
-    ElMessage({ type: 'error', message: '验证码不能为空！' })
-    return
-  }
-  //验证验证码是否正确
-  if (sidentifyMode.value != identifyCode.value) {
-    ElMessage({ type: 'error', message: '验证码错误' })
-    refreshCode()
-    return
-  } else {
-    ElMessage({ type: 'success', message: '登录成功' })
-    $router.push('/home')
-  }
+    // 用户名或密码不能为空
+    if(!user.username || !user.password) {
+        ElMessage({ type: 'error', message: '用户名或密码不能为空！' })
+        return
+    }
+    //验证验证码不为空
+    if (!sidentifyMode.value) {
+        ElMessage({ type: 'error', message: '验证码不能为空！' })
+        return
+    }
+    //验证验证码是否正确
+    if (sidentifyMode.value != identifyCode.value) {
+        ElMessage({ type: 'error', message: '验证码错误！' })
+        refreshCode()
+        return
+    } else {
+        getLogin(user).then((res) => {
+            console.log(res);
+            if(res.code == 200) {
+                ElMessage({ type: 'success', message: '登录成功！' })           
+                localStorage.setItem('token', res.data.token)
+                $router.push('/home')
+            } else {
+                ElMessage({ type: 'error', message: '用户名或密码错误！' })
+            }
+            
+
+        }).catch((err) => {
+            ElMessage({ type: 'error', message: err })
+            
+        })
+        
+    }
+    
+}
+
+// 注册
+const register = () => {
+    $router.push('/register')
 }
 
 
 
 const user = reactive({
     username: '',
-    password: '',
-    validCode: ''
+    password: ''
 })
 
 
