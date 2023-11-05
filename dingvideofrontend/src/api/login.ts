@@ -29,11 +29,11 @@ export const getRegister: requestModel = (data?: any) => request({
 
   
 // 由id获取用户信息
-export const getUserInfoById: requestModel = (id: bigint) => request({
+export const getUserInfoById: requestModel = (data?: any) => request({
   url: `${baseUrl}/info`,
   method: 'get',
   params: {
-    id: id
+    id: data.id
   }
 });
 

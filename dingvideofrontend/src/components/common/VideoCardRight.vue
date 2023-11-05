@@ -3,8 +3,7 @@
     <div class="info" style="width: 500px;margin-top: 10px;">
       <!-- 卡片头部 -->
       <el-row style="align-items: center;width: 500px;">
-        <a :href="`/user/index/${detail.user.id}`">
-          <!--                          <el-avatar :src="detail.user.avatar" size="large"/>-->
+        <a :href="`/user/index/${detail.userId}`">
           <el-avatar :size="70" src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png" size="large"></el-avatar>
         </a>
         <!--                        <div class="username">{{ }}</div>-->

@@ -76,7 +76,6 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('@/views/user/index.vue'),
     meta: {
       title: '个人页面',
-      keepAlive: true,
     },
   },
 ]

@@ -18,6 +18,9 @@
 import 'iconify-icon';
 import { ref } from 'vue';
 import { loginStore } from '@/store/login/login.ts'
+import { useRouter } from 'vue-router';
+
+const router = useRouter()
 // 登录状态管理
 const store = loginStore()
 const props = defineProps({
@@ -44,7 +47,7 @@ const props = defineProps({
 })
 function handleCommand(payload:any){
   if(payload === "center") {
-
+    router.push({path: `/user/index/4`})
   } else if (payload === "exit") {
     store.clearToken()
     store.clearUserInfo()
