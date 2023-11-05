@@ -3,8 +3,8 @@
     <div class="menu-icon">
       <el-image :src="logo"></el-image>
     </div>
-    <div class="menu-item" v-for="(item, index) in items" :key="index" :class="{ 'selected': selected === index }" @click="selectItem(index)">
-      <div class="menu-item-wrapper">
+    <div class="menu-item" v-for="(item, index) in items" :key="index"  @click="selectItem(index)">
+      <div class="menu-item-wrapper" :class="{ 'selected': selected === index }">
         <el-icon class="menu-item-icon" :size="25">
         <component :is="item.icon"></component>
         </el-icon >
@@ -69,6 +69,7 @@ function selectItem(index: number) {
   align-items: center;
   height: 100%;
   overflow-y: scroll;
+  // box-shadow: 5px 5px 20px 0 rgba(0, 0, 0, 0.5); /* 添加阴影 */
   // background-color: red;
   
   .menu-item{
