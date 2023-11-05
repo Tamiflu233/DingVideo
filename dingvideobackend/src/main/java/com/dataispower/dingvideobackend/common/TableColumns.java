@@ -32,6 +32,7 @@ public interface TableColumns {
         String LIKES = "likes";
         String COLLECTIONS = "collections";
         String COMMENTS = "comments";
+        String CATEGORY = "category";
         String USERID = "id";
     }
 
