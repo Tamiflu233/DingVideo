@@ -31,6 +31,9 @@ public class Video {
     @Column(name = DESCRIPTION, columnDefinition = "text")
     private String description;
 
+    @Column(name = CATEGORY)
+    private String category;
+
     @Column(name = LIKES)
     @ColumnDefault("0")
     private Long likes;

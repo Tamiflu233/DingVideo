@@ -5,7 +5,9 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.dataispower.dingvideobackend.config.AuthenticationConfigConstants;
 import com.dataispower.dingvideobackend.dto.UserLogin;
 import com.dataispower.dingvideobackend.dto.UserRegister;
+import com.dataispower.dingvideobackend.dto.UserUpdate;
 import com.dataispower.dingvideobackend.entity.User;
+import com.dataispower.dingvideobackend.enums.Gender;
 import com.dataispower.dingvideobackend.exception.BusinessException;
 import com.dataispower.dingvideobackend.exception.ErrorType;
 import com.dataispower.dingvideobackend.repository.UserRepository;
@@ -44,7 +46,18 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User register(UserRegister userRegister) {
-        return null;
+        if(existUser(userRegister.getUsername())) {
+            return null;
+        }
+        User user = new User();
+        user.setUsername(userRegister.getUsername());
+        user.setPassword(passwordEncoder.encode(userRegister.getPassword()));
+        user.setNickname(userRegister.getNickname());
+        user.setEmail(userRegister.getEmail());
+        user.setPhone(userRegister.getPhone());
+        user.setAvatar("https://cdn.jsdelivr.net/gh/Tamiflu233/AssetsRepo/img/Avatar.jpg");
+        userRepository.save(user);
+        return user;
     }
 
     @Override
@@ -91,5 +104,21 @@ public class UserServiceImpl implements UserService {
     @Override
     public User searchUserById(Integer id) {
         return loadUserById(id);
+    }
+    public Boolean existUser(String username) {
+        return userRepository.getUserByUsername(username) != null;
+    }
+
+    @Override
+    public User updateUser(String username, UserUpdate userUpdate) {
+        User user = userRepository.getUserByUsername(username);
+        user.setPassword(passwordEncoder.encode(userUpdate.getPassword()));
+        user.setNickname(userUpdate.getNickname());
+        user.setEmail(userUpdate.getEmail());
+        user.setPhone(userUpdate.getPhone());
+        user.setAvatar(userUpdate.getAvatar());
+        user.setAge(userUpdate.getAge());
+        user.setGender(Gender.fromString(userUpdate.getGender()));
+        return user;
     }
 }

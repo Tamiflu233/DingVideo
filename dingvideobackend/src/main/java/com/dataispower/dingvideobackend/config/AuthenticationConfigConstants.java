@@ -14,10 +14,10 @@ public class AuthenticationConfigConstants {
 
     public static final String HEADER_STRING = "Authorization";
 
-    public static final String POST_URL = "/api/vod/**";
+    public static final String POST_URL = "/api/vod";
 
-    public static final String USER_API = "/api/user/**";
+    public static final String USER_API = "/api/user";
 
-    public static final String VIDEO_API = "/api/videos/**";
+    public static final String VIDEO_API = "/api/videos";
 }
 

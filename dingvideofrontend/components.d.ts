@@ -20,6 +20,7 @@ declare module 'vue' {
     ElInput: typeof import('element-plus/es')['ElInput']
     ElMain: typeof import('element-plus/es')['ElMain']
     ElRow: typeof import('element-plus/es')['ElRow']
+    ElTag: typeof import('element-plus/es')['ElTag']
     ElText: typeof import('element-plus/es')['ElText']
     IconButton: typeof import('./src/components/common/IconButton.vue')['default']
     LikeButton: typeof import('./src/components/common/LikeButton.vue')['default']

@@ -2,6 +2,8 @@ package com.dataispower.dingvideobackend.dto;
 
 import lombok.Data;
 
+import javax.validation.constraints.Email;
+
 /**
  * author:heroding
  * date:2023/11/1 15:17
@@ -14,7 +16,7 @@ public class UserResponse {
     private String nickname;
 
     private String gender;
-
+    @Email
     private String email;
 
     private String phone;

@@ -2,6 +2,7 @@ package com.dataispower.dingvideobackend.service.interfaces;
 
 import com.dataispower.dingvideobackend.dto.UserLogin;
 import com.dataispower.dingvideobackend.dto.UserRegister;
+import com.dataispower.dingvideobackend.dto.UserUpdate;
 import com.dataispower.dingvideobackend.entity.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -29,4 +30,8 @@ public interface UserService extends UserDetailsService {
     // 获取用户信息
     User searchUser(String username);
     User searchUserById(Integer id);
+    // 判断当前用户是否存在
+    Boolean existUser(String username);
+    // 更新用户资料信息
+    User updateUser(String username, UserUpdate userUpdate);
 }
