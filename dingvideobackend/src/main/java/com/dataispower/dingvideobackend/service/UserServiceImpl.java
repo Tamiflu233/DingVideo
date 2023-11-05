@@ -57,6 +57,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User loadUserById(Integer id) throws UsernameNotFoundException {
+        User user = userRepository.getUserById(Long.valueOf(id));
+        if (user == null) {
+            throw new BusinessException(ErrorType.UNKNOWN_USERNAME);
+        }
+        return user;
+    }
+
+    @Override
     public User getCurrentUser() {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         return loadUserByUsername(username);
@@ -74,4 +83,13 @@ public class UserServiceImpl implements UserService {
                 .sign(Algorithm.HMAC512(AuthenticationConfigConstants.SECRET.getBytes()));
     }
 
+    @Override
+    public User searchUser(String username) {
+        return loadUserByUsername(username);
+    }
+
+    @Override
+    public User searchUserById(Integer id) {
+        return loadUserById(id);
+    }
 }

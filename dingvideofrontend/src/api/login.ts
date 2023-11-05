@@ -2,17 +2,20 @@ import request from '@/utils/request';
 import { requestModel } from '@/types/service';
 
 // 获取用户信息
+const baseUrl:string = "/api/user"
 export const getLogin: requestModel = () => request({
     url: '/login',
     method: 'get',
   });
 
   
-// 获取用户信息
-export const getUserInfo: requestModel = () => request({
-  url: '/info',
+// 由id获取用户信息
+export const getUserInfoById: requestModel = (id: bigint) => request({
+  url: `${baseUrl}/info`,
   method: 'get',
-  
+  params: {
+    id: id
+  }
 });
 
 // 退出登录

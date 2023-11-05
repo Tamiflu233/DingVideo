@@ -11,4 +11,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface UserRepository extends JpaRepository<User, Long> {
     // 根据用户名获取用户信息
     User getUserByUsername(String username);
+    User getUserById(Long id);
 }

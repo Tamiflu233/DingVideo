@@ -63,11 +63,11 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
 
-    path: '/user',
+    path: '/user/index/:id',
     name: 'user',
     component: () => import('@/views/user/index.vue'),
     meta: {
-      title: '个人中心',
+      title: '个人页面',
       keepAlive: true,
     },
   },

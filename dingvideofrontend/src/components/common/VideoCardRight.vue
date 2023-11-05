@@ -3,8 +3,7 @@
     <div class="info" style="width: 500px;margin-top: 10px;">
       <!-- 卡片头部 -->
       <el-row style="align-items: center;width: 500px;">
-        <!--                        <a :href="`/user/index/${detail.user.id}`">-->
-        <a>
+        <a :href="`/user/index/${detail.user.id}`">
           <!--                          <el-avatar :src="detail.user.avatar" size="large"/>-->
           <el-avatar src="https://cdn.jsdelivr.net/gh/Tamiflu233/AssetsRepo/img/Avatar.jpg" size="large"/>
         </a>
