@@ -28,7 +28,9 @@
       "@/*":[					
         "src/*"					
       ]							
-     }							
+     },
+     "typeRoots": ["./node_modules/@types", "./types"],
+     						
      //---------
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],

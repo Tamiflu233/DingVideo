@@ -29,6 +29,7 @@ declare module 'vue' {
     ElText: typeof import('element-plus/es')['ElText']
     IconButton: typeof import('./src/components/common/IconButton.vue')['default']
     LikeButton: typeof import('./src/components/common/LikeButton.vue')['default']
+    LoginAvatar: typeof import('./src/components/common/LoginAvatar.vue')['default']
     MyVideo: typeof import('./src/components/MyVideo/index.vue')['default']
     NavHeader: typeof import('./src/components/common/NavHeader.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']

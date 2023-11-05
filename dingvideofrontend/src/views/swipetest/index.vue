@@ -1,12 +1,15 @@
 <template>
   <div class="swipe-wrapper">
-   <VideoCardRight
+   <!-- <VideoCardRight
     :detail="detail"
-   ></VideoCardRight>
+   ></VideoCardRight> -->
+   <LoginAvatar>
+    
+   </LoginAvatar>
   </div>
 </template>
 <script setup lang="ts">
-const VideoCardRight = defineAsyncComponent(() => import("@/components/common/VideoCardRight.vue"))
+const LoginAvatar = defineAsyncComponent(() => import("@/components/common/LoginAvatar.vue"))
 // function toggleLike(payload:Boolean) {
 //   let diff:number = payload ? 1 : -1;
 //   count.value = count.value + diff;
