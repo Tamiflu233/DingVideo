@@ -2,6 +2,8 @@
 import { defineConfig, UserConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import path from 'path'
+import Icons from 'unplugin-icons/vite'
+import IconsResolver from 'unplugin-icons/resolver'
 import AutoImport from 'unplugin-auto-import/vite'    //自动引入api
 import Components from 'unplugin-vue-components/vite'  //按需自动引入组件
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
@@ -44,7 +46,14 @@ export default defineConfig(({ mode }: UserConfig): UserConfig => {
     plugins: [
       vue(),
       AutoImport({
-        resolvers: [ElementPlusResolver()],  //对于element puls的配置
+        resolvers: [
+          ElementPlusResolver(),
+          // Auto import icon components
+          // 自动导入图标组件
+          IconsResolver({
+            prefix: 'Icon',
+          }),
+        ],  //对于element puls的配置
         imports: [
           'vue',              //自动引入的vue的ref等方法
           'vue-router',       //引入useRoute等方法
@@ -56,7 +65,17 @@ export default defineConfig(({ mode }: UserConfig): UserConfig => {
         dts: 'src/auto-imports.d.ts'
       }),
       Components({
-        resolvers: [ElementPlusResolver()],   //对于element puls的配置
+        resolvers: [
+          // Auto register icon components
+          // 自动注册图标组件
+          IconsResolver({
+            enabledCollections: ['ep'],
+          }),
+          ElementPlusResolver()
+        ],   //对于element puls的配置
+      }),
+      Icons({
+        autoInstall: true,
       }),
     ],
     css: {

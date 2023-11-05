@@ -1,18 +1,28 @@
 <template>
   <div class="swipe-wrapper">
-    <van-swipe class="my-swipe" :loop="false" :show-indicators="false" vertical :touchable="true">
-      <van-swipe-item>1</van-swipe-item>
-      <van-swipe-item>2</van-swipe-item>
-      <van-swipe-item>3</van-swipe-item>
-      <van-swipe-item>4</van-swipe-item>
-    </van-swipe>
+   <VideoCardRight
+    :detail="detail"
+   ></VideoCardRight>
   </div>
 </template>
 <script setup lang="ts">
+const VideoCardRight = defineAsyncComponent(() => import("@/components/common/VideoCardRight.vue"))
+// function toggleLike(payload:Boolean) {
+//   let diff:number = payload ? 1 : -1;
+//   count.value = count.value + diff;
+// }
+const count = ref(0)
+const detail = reactive({
+  username: "原神",
+  title: "测试标题",
+  content: "测试内容",
+  createTime: "2023-11-5"
+})
 
 </script>
 
 <style lang="css" scoped>
+
 .swipe-wrapper{
   top: 0;
   bottom: 0;
