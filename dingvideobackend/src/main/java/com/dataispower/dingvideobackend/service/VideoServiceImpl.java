@@ -19,4 +19,10 @@ public class VideoServiceImpl implements VideoService {
         List<Video> videos = videoRepository.getVideosByCategory(kind);
         return videos;
     }
+
+    @Override
+    public List<Video> getVideoListByUserIdAndType(Integer userid, Integer type) {
+        List<Video> videos = videoRepository.getVideosByUserId(Long.valueOf(userid));
+        return videos;
+    }
 }
