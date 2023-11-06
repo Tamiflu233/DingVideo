@@ -15,10 +15,12 @@ const routes: Array<RouteRecordRaw> = [
     children: [
       {
         path: '',
+        name: 'RecommendVideos',
         component: () => import('@/views/home/RecommendVideos/RecommendVideos.vue'),
       },
       {
         path: 'category',
+        name: 'CategoryVideos',
         component: () => import('@/views/home/Category/CategoryVideos.vue'),
       }
     ],

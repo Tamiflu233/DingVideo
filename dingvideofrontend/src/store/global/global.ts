@@ -21,26 +21,24 @@ export const globalStore = defineStore("global", {
       } else if(url === "/home/category") {
         let kind:string = query["kind"] as string;
         if(kind !== null) {
-          if(kind === "recommend") {
+          if(kind === "hot") {
             this.setSideBarIndex(1);
-          } else if(kind === "hot") {
-            this.setSideBarIndex(2);
           }else if(kind === "sports") {
-            this.setSideBarIndex(3);
+            this.setSideBarIndex(2);
           }else if(kind === "knowledge") {
-            this.setSideBarIndex(4);
+            this.setSideBarIndex(3);
           }else if(kind === "game") {
-            this.setSideBarIndex(5);
+            this.setSideBarIndex(4);
           }else if(kind === "entertainment") {
-            this.setSideBarIndex(6);
+            this.setSideBarIndex(5);
           }else if(kind === "food") {
-            this.setSideBarIndex(7);
+            this.setSideBarIndex(6);
           }else if(kind === "movie") {
-            this.setSideBarIndex(8);
+            this.setSideBarIndex(7);
           }else if(kind === "fashion") {
-            this.setSideBarIndex(9);
+            this.setSideBarIndex(8);
           }else if(kind === "animation") {
-            this.setSideBarIndex(10);
+            this.setSideBarIndex(9);
           }
         }
       }

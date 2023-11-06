@@ -38,6 +38,7 @@ declare module 'vue' {
     SideMenu: typeof import('./src/components/common/SideMenu.vue')['default']
     ValidCode: typeof import('./src/components/common/ValidCode.vue')['default']
     VideoCardRight: typeof import('./src/components/common/VideoCardRight.vue')['default']
+    VideoDescription: typeof import('./src/components/common/VideoDescription.vue')['default']
     VideoInfoCard: typeof import('./src/components/common/VideoInfoCard.vue')['default']
     VideoSwipe: typeof import('./src/components/common/VideoSwipe.vue')['default']
     VideoToolbar: typeof import('./src/components/common/VideoToolbar.vue')['default']

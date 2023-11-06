@@ -15,17 +15,17 @@ const timeUtil =  (timestamp: string, mode: 'relative' | 'date' = 'relative'): s
   if (diff < 60) {
     return `${diff} 秒钟前`;
   } else if (diff < 3600) {
-    return `${Math.floor(diff / 60)} 分钟前`;
+    return `${Math.floor(diff / 60)}分钟前`;
   } else if (diff < 86400) {
-    return `${Math.floor(diff / 3600)} 小时前`;
+    return `${Math.floor(diff / 3600)}小时前`;
   } else if (diff < 604800) {
-    return `${Math.floor(diff / 86400)} 天前`;
+    return `${Math.floor(diff / 86400)}天前`;
   } else if (diff < 2592000) {
-    return `${Math.floor(diff / 604800)} 周前`;
+    return `${Math.floor(diff / 604800)}周前`;
   } else if (diff < 31536000) {
-    return `${Math.floor(diff / 2592000)} 个月前`;
+    return `${Math.floor(diff / 2592000)}个月前`;
   } else {
-    return `${Math.floor(diff / 31536000)} 年前`;
+    return `${Math.floor(diff / 31536000)}年前`;
   }
 }
 export default timeUtil;

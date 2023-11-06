@@ -47,7 +47,7 @@ const props = defineProps({
 })
 function handleCommand(payload:any){
   if(payload === "center") {
-    router.push({path: `/user/index/4`})
+    router.push({path: `/user/index/${store.userInfo.id}`})
   } else if (payload === "exit") {
     store.clearToken()
     store.clearUserInfo()

@@ -6,18 +6,23 @@
     >
 
     </VideoSwipe>
+    <div class="close-btn" @click="handleClick">
+      <iconify-icon class="close-icon" icon="mingcute:close-fill"></iconify-icon>
+    </div>
 
   </div>
 </template>
 
 <script setup lang="ts">
 import { VideoDetail } from "@/types/videoInfo"
-import { useRoute } from 'vue-router'
+import { useRoute,useRouter } from 'vue-router'
 import {watch} from 'vue';
 import { onMounted } from 'vue';
 import {getCategoryVideos} from '@/api/video';
 import { videoStore } from "@/store/videos/videos";
+import 'iconify-icon';
 const route = useRoute()
+const router = useRouter()
 
 const store = videoStore();
 const index = ref(parseInt(route.params.index as string))
@@ -35,7 +40,9 @@ const VideoSwipe = defineAsyncComponent(() => import("@/components/common/VideoS
 //     default: 0
 //   }
 // })
-
+function handleClick() {
+  router.back()
+}
 watch(
   () => route.params.kind,
   async (newKind) => {
@@ -68,6 +75,29 @@ onMounted(async () =>{
   left:0;
   right:0;
 }
+.close-btn {
+  background-color: rgba(0,0,0,.18);
+  border: .5px solid hsla(0,0%,100%,.15);
+  border-radius: 32px;
+  height: 64px;
+  width: 64px;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 50px;
+  left: 50px;
+  cursor: pointer;
+  color: hsla(0,0%,100%,.15);
 
+  &:hover {
+    color: #fff;
+    background-color: rgba(0,0,0,.19);
+  }
+  .close-icon {
+    
+    font-size: 32px;
+  }
+}
 
 </style>

@@ -3,7 +3,7 @@
       <van-swipe-item>
         <!-- <div class="video-wrapper"> -->
           <video ref="videoPlayer1" @play="video1Play" @pause="video1Pause" class="video-js" style="margin: auto auto" ></video>
-          <VideoToolBar @prev="prev" @next="next" @toggle-comment="onShowComment" class="tool-bar"></VideoToolBar>
+          <VideoToolBar :videoInfo="video1Info" @prev="prev" @next="next" @toggle-comment="onShowComment" class="tool-bar"></VideoToolBar>
           <div class="show-comment-btn" v-if="!isShowComment" @click="onShowComment">
             <el-icon class="show-comment-icon" >
               <ArrowLeftBold />
@@ -16,14 +16,16 @@
               </el-icon>
             </div>
             <VideoCardRight
-              :detail="detail"
+            :videoInfo="video1Info"
             ></VideoCardRight>
           </div>
+          <VideoDescription class="video-description" :videoInfo="video1Info"></VideoDescription>
+
         <!-- </div> -->
       </van-swipe-item>
       <van-swipe-item>
         <video ref="videoPlayer2" @play="video2Play" @pause="video2Pause" class="video-js" style="margin: auto auto"></video>\
-        <VideoToolBar @prev="prev" @next="next" @toggle-comment="onShowComment" class="tool-bar"></VideoToolBar>
+        <VideoToolBar :videoInfo="video2Info" @prev="prev" @next="next" @toggle-comment="onShowComment" class="tool-bar"></VideoToolBar>
         <div class="show-comment-btn" v-if="!isShowComment" @click="onShowComment">
           <el-icon class="show-comment-icon">
             <ArrowLeftBold />
@@ -36,13 +38,15 @@
             </el-icon>
           </div>
           <VideoCardRight
-            :detail="detail"
+          :videoInfo="video2Info"
           ></VideoCardRight>
         </div>
+        <VideoDescription class="video-description" :videoInfo="video2Info"></VideoDescription>
+
       </van-swipe-item>
       <van-swipe-item>
         <video ref="videoPlayer3" @play="video3Play" @pause="video3Pause" class="video-js" style="margin: auto auto"></video>
-        <VideoToolBar @prev="prev" @next="next" @toggle-comment="onShowComment" class="tool-bar"></VideoToolBar>
+        <VideoToolBar :videoInfo="video3Info" @prev="prev" @next="next" @toggle-comment="onShowComment" class="tool-bar"></VideoToolBar>
         <div class="show-comment-btn" v-if="!isShowComment" @click="onShowComment">
             <el-icon class="show-comment-icon">
               <ArrowLeftBold />
@@ -55,9 +59,11 @@
             </el-icon>
           </div>
           <VideoCardRight
-            :detail="detail"
+          :videoInfo="video3Info"
           ></VideoCardRight>
         </div>
+        <VideoDescription class="video-description" :videoInfo="video3Info"></VideoDescription>
+
       </van-swipe-item>
     </van-swipe>
 </template>
@@ -70,14 +76,7 @@ import Player from 'video.js/dist/types/player'
 import "video.js/dist/video-js.css"
 const VideoToolBar = defineAsyncComponent(() => import("@/components/common/VideoToolbar.vue"))
 const VideoCardRight = defineAsyncComponent(() => import("@/components/common/VideoCardRight.vue"))
-// 评论
-const detail = reactive({
-  userId: 4,
-  username: "原神",
-  title: "测试标题",
-  content: "测试内容",
-  createTime: "2023-11-5"
-})
+const VideoDescription = defineAsyncComponent(() => import("@/components/common/VideoDescription.vue"))
 
 // 是否显示评论框
 const isShowComment = ref(false)
@@ -104,6 +103,21 @@ const props = defineProps({
 const video1PauseShow = ref(true)
 const video2PauseShow = ref(true)
 const video3PauseShow = ref(true)
+/* 三个播放器的视频信息，用于显示在工具栏、评论区等 */
+const video1Info = ref()
+const video2Info = ref()
+const video3Info = ref()
+/* 更新当前播放器视频信息 */
+function setPlayerVideoInfo(playerId:number,videoIndex:number) {
+  if(playerId == 1) {
+    video1Info.value = videoQueue.queue[videoIndex]
+  } else if(playerId == 2) {
+    video2Info.value = videoQueue.queue[videoIndex]
+  } else if(playerId == 3) {
+    video3Info.value = videoQueue.queue[videoIndex]
+  }
+  
+}
 // 视频轮播器
 const videoSwipe = ref();
 // 视频列表
@@ -112,6 +126,7 @@ const videoQueue: { current: number; queue: VideoDetail[] } = reactive({
   queue: props.videos
 })
 function refreshVideos() {
+  /* 设置播放器封面和播放地址 */
   myPlayer1.value.poster(videoQueue.queue[videoQueue.current % videoQueue.queue.length].coverUrl)
   myPlayer2.value.poster(videoQueue.queue[(videoQueue.current + 1) % videoQueue.queue.length].coverUrl)
   myPlayer3.value.poster(videoQueue.queue[(videoQueue.current + 2) % videoQueue.queue.length].coverUrl)
@@ -119,9 +134,13 @@ function refreshVideos() {
   myPlayer1.value.src(videoQueue.queue[videoQueue.current % videoQueue.queue.length].videoUrl)
   myPlayer2.value.src(videoQueue.queue[(videoQueue.current + 1) % videoQueue.queue.length].videoUrl)
   myPlayer3.value.src(videoQueue.queue[(videoQueue.current + 2) % videoQueue.queue.length].videoUrl)
+  /* 设置视频信息 */
+  setPlayerVideoInfo(1,videoQueue.current % videoQueue.queue.length)
+  setPlayerVideoInfo(2,(videoQueue.current + 1) % videoQueue.queue.length)
+  setPlayerVideoInfo(3,(videoQueue.current + 2) % videoQueue.queue.length)
   videoSwipe.value.swipeTo(0,{"immediate": true})
 }
-// 如果页面不销毁，需要监听props变化
+// 如果页面不销毁，需要监听props变化,即时刷新视频
 
 watch(
   () => props.videos,
@@ -219,14 +238,21 @@ const videoSet = (index:number,playerId:number) => {
   if(playerId === 1) {
     myPlayer1.value.poster(videoQueue.queue[index].coverUrl)
     myPlayer1.value.src(videoQueue.queue[index].videoUrl)
+    setPlayerVideoInfo(1,index)
   } else if(playerId === 2) {
     myPlayer2.value.poster(videoQueue.queue[index].coverUrl)
     myPlayer2.value.src(videoQueue.queue[index].videoUrl)
+    setPlayerVideoInfo(2,index)
   }
   else if(playerId === 3) {
     myPlayer3.value.poster(videoQueue.queue[index].coverUrl)
     myPlayer3.value.src(videoQueue.queue[index].videoUrl)
+    setPlayerVideoInfo(3,index)
   }
+  console.log(`视频1信息${video1Info.value.title}`);
+  console.log(`视频2信息${video2Info.value.title}`);
+  console.log(`视频3信息${video3Info.value.title}`);
+  
 }
 // 开始页数
 let startIndex: number = 0;
@@ -287,6 +313,9 @@ function onDragEnd(args:{index: number}) {
         myPlayer1.value.src(videoQueue.queue[videoQueue.current % videoQueue.queue.length].videoUrl)
         myPlayer2.value.src(videoQueue.queue[(videoQueue.current + 1) % videoQueue.queue.length].videoUrl)
         myPlayer3.value.src(videoQueue.queue[(videoQueue.current + 2) % videoQueue.queue.length].videoUrl)
+        setPlayerVideoInfo(1,videoQueue.current % videoQueue.queue.length)
+        setPlayerVideoInfo(2,(videoQueue.current + 1) % videoQueue.queue.length)
+        setPlayerVideoInfo(3,(videoQueue.current + 2) % videoQueue.queue.length)
       }
     }
   } else if (args.index === startIndex - 1 || (startIndex === 0 && args.index === 2)) {
@@ -302,6 +331,9 @@ function onDragEnd(args:{index: number}) {
         myPlayer1.value.src(videoQueue.queue[(videoQueue.current - 2) % videoQueue.queue.length].videoUrl)
         myPlayer2.value.src(videoQueue.queue[(videoQueue.current - 1) % videoQueue.queue.length].videoUrl)
         myPlayer3.value.src(videoQueue.queue[(videoQueue.current) % videoQueue.queue.length].videoUrl)
+        setPlayerVideoInfo(1,(videoQueue.current - 2) % videoQueue.queue.length)
+        setPlayerVideoInfo(2,(videoQueue.current - 1) % videoQueue.queue.length)
+        setPlayerVideoInfo(3,(videoQueue.current) % videoQueue.queue.length)
       }
     }
   }
@@ -339,6 +371,9 @@ function nextPage() {
       myPlayer1.value.src(videoQueue.queue[videoQueue.current % videoQueue.queue.length].videoUrl)
       myPlayer2.value.src(videoQueue.queue[(videoQueue.current + 1) % videoQueue.queue.length].videoUrl)
       myPlayer3.value.src(videoQueue.queue[(videoQueue.current + 2) % videoQueue.queue.length].videoUrl)
+      setPlayerVideoInfo(1,videoQueue.current % videoQueue.queue.length)
+      setPlayerVideoInfo(2,(videoQueue.current + 1) % videoQueue.queue.length)
+      setPlayerVideoInfo(3,(videoQueue.current + 2) % videoQueue.queue.length)
     }
     videoSwipe.value.next();
 
@@ -358,6 +393,9 @@ function prevPage() {
     myPlayer1.value.src(videoQueue.queue[(videoQueue.current - 2) % videoQueue.queue.length].videoUrl)
     myPlayer2.value.src(videoQueue.queue[(videoQueue.current - 1) % videoQueue.queue.length].videoUrl)
     myPlayer3.value.src(videoQueue.queue[(videoQueue.current) % videoQueue.queue.length].videoUrl)
+    setPlayerVideoInfo(1,(videoQueue.current - 2) % videoQueue.queue.length)
+    setPlayerVideoInfo(2,(videoQueue.current - 1) % videoQueue.queue.length)
+    setPlayerVideoInfo(3,(videoQueue.current) % videoQueue.queue.length)
   }
   videoSwipe.value.prev();
 
@@ -619,5 +657,11 @@ onUnmounted(() => {
       }
     }
   }
+.video-description {
 
+  position: absolute;
+  bottom: 70px;
+  left: 15px;
+  z-index: 999;
+}
 </style>
