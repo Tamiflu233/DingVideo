@@ -469,7 +469,7 @@ onUnmounted(() => {
 }
 .tool-bar {
   position: absolute;
-  bottom: 20%;
+  bottom: 10%;
   right: 3%;
 }
 .show-comment-btn {
