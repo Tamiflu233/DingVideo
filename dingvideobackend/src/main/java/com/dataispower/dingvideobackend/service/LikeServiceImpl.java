@@ -1,9 +1,7 @@
 package com.dataispower.dingvideobackend.service;
 
-import com.alibaba.fastjson.JSON;
 import com.dataispower.dingvideobackend.entity.Comment;
-import com.dataispower.dingvideobackend.entity.User;
-import com.dataispower.dingvideobackend.entity.UserLike;
+import com.dataispower.dingvideobackend.dto.UserLike;
 import com.dataispower.dingvideobackend.entity.Video;
 import com.dataispower.dingvideobackend.repository.UserLikeRepository;
 import com.dataispower.dingvideobackend.repository.UserRepository;
@@ -17,7 +15,6 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**

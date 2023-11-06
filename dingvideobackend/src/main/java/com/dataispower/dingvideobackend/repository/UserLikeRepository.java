@@ -1,6 +1,6 @@
 package com.dataispower.dingvideobackend.repository;
 
-import com.dataispower.dingvideobackend.entity.UserLike;
+import com.dataispower.dingvideobackend.dto.UserLike;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

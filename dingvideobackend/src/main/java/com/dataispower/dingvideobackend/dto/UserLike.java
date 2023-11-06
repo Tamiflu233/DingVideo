@@ -1,5 +1,6 @@
-package com.dataispower.dingvideobackend.entity;
+package com.dataispower.dingvideobackend.dto;
 
+import com.dataispower.dingvideobackend.entity.CommonEntity;
 import lombok.Data;
 
 import javax.persistence.Entity;

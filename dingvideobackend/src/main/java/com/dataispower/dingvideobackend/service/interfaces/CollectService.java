@@ -1,6 +1,6 @@
 package com.dataispower.dingvideobackend.service.interfaces;
 
-import com.dataispower.dingvideobackend.entity.UserCollect;
+import com.dataispower.dingvideobackend.dto.UserCollect;
 
 import java.util.List;
 import java.util.Map;

@@ -1,5 +1,6 @@
-package com.dataispower.dingvideobackend.entity;
+package com.dataispower.dingvideobackend.dto;
 
+import com.dataispower.dingvideobackend.entity.CommonEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,7 +16,7 @@ import javax.persistence.Entity;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserFollow extends CommonEntity{
+public class UserFollow extends CommonEntity {
     // 用户id
     private String userId;
     // 被关注对象id
