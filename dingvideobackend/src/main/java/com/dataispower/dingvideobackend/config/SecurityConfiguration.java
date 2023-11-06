@@ -13,7 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 /**
  * author:heroding
  * date:2023/11/1 15:28
- * description：
+ * description：安全设置
  **/
 
 @EnableWebSecurity
