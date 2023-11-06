@@ -10,7 +10,7 @@ import static com.dataispower.dingvideobackend.common.TableColumns.VIDEO.*;
 /**
  * author:heroding
  * date:2023/11/1 14:39
- * description：视频信息
+ * description：视频信息表
  **/
 @Data
 @Entity

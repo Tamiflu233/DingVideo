@@ -3,12 +3,10 @@ package com.dataispower.dingvideobackend.entity;
 import com.dataispower.dingvideobackend.enums.Gender;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
-import org.hibernate.validator.constraints.LuhnCheck;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-
 import java.util.Collection;
 import java.util.List;
 
@@ -16,7 +14,7 @@ import static com.dataispower.dingvideobackend.common.TableColumns.USER.*;
 /**
  * author:heroding
  * date:2023/10/31 21:02
- * description：用户类
+ * description：用户表
  **/
 
 @Entity

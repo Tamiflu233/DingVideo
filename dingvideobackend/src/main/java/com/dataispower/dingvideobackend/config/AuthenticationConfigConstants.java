@@ -3,7 +3,7 @@ package com.dataispower.dingvideobackend.config;
 /**
  * author:heroding
  * date:2023/11/1 15:27
- * description：
+ * description：安全路径和名称封装
  **/
 public class AuthenticationConfigConstants {
     public static final String SECRET = "data_is_power";
