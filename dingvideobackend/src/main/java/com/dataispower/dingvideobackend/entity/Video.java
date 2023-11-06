@@ -18,7 +18,7 @@ import static com.dataispower.dingvideobackend.common.TableColumns.VIDEO.*;
 public class Video {
     @Id
     @Column(name = VIDEOID, unique = true)
-    private Long videoId;
+    private String videoId;
 
     @Column(name = VIDEOPATH, columnDefinition = "text", unique = true)
     private String videoUrl;
