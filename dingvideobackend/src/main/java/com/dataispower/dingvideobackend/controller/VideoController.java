@@ -27,8 +27,50 @@ public class VideoController {
      */
     @GetMapping("/category")
     public ResponseResult getCategoryVideo(@RequestParam String kind) {
+        try {
+            List<Video> videos = videoService.getVideoList(kind);
+            Map<String, Object> data = new HashMap<>();
+            if (videos != null) {
+                return ResponseResult.success("获取视频成功", videos);
+            } else {
+                return ResponseResult.error("获取视频失败");
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseResult.error("获取视频失败");
+        }
+
+    }
+    @GetMapping("/home")
+    public ResponseResult getHomeVideo() {
+        try {
+            List<Video> videos = videoService.getHomeVideos();
+            Map<String, Object> data = new HashMap<>();
+            if (videos != null) {
+                return ResponseResult.success("获取视频成功", videos);
+            } else {
+                return ResponseResult.error("获取视频失败");
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseResult.error("获取视频失败");
+        }
+
+    }
+
+    /**
+     * 查找该userid的某种类型(作品、收藏、点赞)的视频
+     * @param userid
+     * @param type
+     * @return
+     */
+    @GetMapping("/person")
+    public ResponseResult getVideoByUserIdAndType(@RequestParam Integer userid, @RequestParam Integer type) {
         ResponseResult res = new ResponseResult();
-        List<Video> videos = videoService.getVideoList(kind);
+        List<Video> videos = videoService.getVideoListByUserIdAndType(userid, type);
+        System.out.println(videos.size());
         Map<String, Object> data = new HashMap<>();
         if (videos != null) {
             data.put("videoInfo", videos);
