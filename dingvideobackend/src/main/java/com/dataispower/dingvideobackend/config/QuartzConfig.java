@@ -70,9 +70,9 @@ public class QuartzConfig {
     @Bean
     public Trigger quartzTriggerFollow(){
         SimpleScheduleBuilder scheduleBuilder = SimpleScheduleBuilder.simpleSchedule()
-                .withIntervalInSeconds(5)  //设置时间周期单位秒
+//                .withIntervalInSeconds(5)  //设置时间周期单位秒
 //                .withIntervalInHours(1)  //两个小时执行一次
-//                .withIntervalInMinutes(1)
+                .withIntervalInMinutes(1)
                 .repeatForever();
         return TriggerBuilder.newTrigger().forJob(quartzDetailFollow())
                 .withIdentity(Follow_TASK_IDENTITY)

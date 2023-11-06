@@ -36,8 +36,6 @@ public interface CollectService {
     Long getSingleVideoCountCollected(String videoId);
     // 判断用户对postId收藏状态
     Boolean getCurrentUserCollectedState(String userId, String postId);
-    // 获取用户被收藏的信息
-    List<Map<String, Object>> getVideosBeCollected(String userId) throws Exception;
     // 判断某一个key是否存在Redis中
     boolean existUserRedisKey(String userId);
     // 判断某一个post是否存在Redis中

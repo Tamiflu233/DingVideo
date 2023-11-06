@@ -12,7 +12,7 @@ import java.util.*;
 /**
  * author:heroding
  * date:2023/11/6 17:58
- * description：
+ * description：Redis缓存关注服务
  **/
 @Service
 public class RedisFollowServiceImpl implements RedisFollowService {

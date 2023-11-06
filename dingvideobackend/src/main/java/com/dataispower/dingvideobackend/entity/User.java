@@ -36,6 +36,8 @@ public class User extends CommonEntity implements UserDetails {
     private String email;
     @Column(name = AGE)
     private String age;
+    @Column(name = FOLLOWS)
+    private Long follows;
     @Column(name = GENDER)
     @Enumerated(EnumType.STRING)
     private Gender gender;

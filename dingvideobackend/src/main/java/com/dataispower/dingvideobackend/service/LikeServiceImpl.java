@@ -3,7 +3,7 @@ package com.dataispower.dingvideobackend.service;
 import com.dataispower.dingvideobackend.entity.Comment;
 import com.dataispower.dingvideobackend.entity.UserLike;
 import com.dataispower.dingvideobackend.entity.Video;
-import com.dataispower.dingvideobackend.repository.UserLikeRepository;
+import com.dataispower.dingvideobackend.repository.LikeRepository;
 import com.dataispower.dingvideobackend.repository.UserRepository;
 import com.dataispower.dingvideobackend.repository.VideoRepository;
 import com.dataispower.dingvideobackend.service.interfaces.CommentService;
@@ -26,7 +26,7 @@ import java.util.*;
 public class LikeServiceImpl implements LikeService {
 
     @Autowired
-    private UserLikeRepository userLikeRepository;
+    private LikeRepository userLikeRepository;
 
     @Autowired
     private RedisLikeService redisLikeService;

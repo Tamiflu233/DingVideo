@@ -20,7 +20,7 @@ public interface TableColumns {
     String COMMENT = "comment";
 
     interface USER {
-        String USER_ID = "id";
+        String USER_ID = "user_id";
         String USERNAME = "username";
         String NICKNAME = "nickname";
         String PASSWORD = "password";
@@ -29,6 +29,7 @@ public interface TableColumns {
         String AGE = "age";
         String GENDER = "gender";
         String AVATAR = "avatar";
+        String FOLLOWS = "follows";
     }
 
     interface VIDEO {
@@ -42,6 +43,9 @@ public interface TableColumns {
         String COMMENTS = "comments";
         String CATEGORY = "category";
         String USERID = "id";
+        String CREATE_TIME = "create_time";
+        String UPDATE_TIME = "update_time";
+
     }
 
     interface COMMON {
@@ -66,7 +70,7 @@ public interface TableColumns {
 
     interface USER_FOLLOW {
         String USER_ID = "user_id";
-        String POST_ID = "follow_id";
+        String FOLLOW_ID = "follow_id";
         String STATUS = "status";
     }
 

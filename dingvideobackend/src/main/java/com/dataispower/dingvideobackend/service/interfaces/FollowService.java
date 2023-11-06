@@ -14,7 +14,7 @@ public interface FollowService {
     // 保存关注记录
     void saveFollow(UserFollow userFollow);
     // 取消关注
-    void defollow(String userId,String postId);
+    void deFollow(String userId,String postId);
     // 关注操作，包括保存关注记录和更新粉丝数
     void follow(String userId, String postId);
     // 将关注记录从redis更新到mysql
@@ -30,11 +30,11 @@ public interface FollowService {
     // 将当前用户的粉丝数从mysql更新到redis
     void loadFollowsCountToRedis(String postId);
     // 返回当前用户关注用户的关注个数
-    List<Map<String, Object>> getUsersCountFollowed(String uerId);
+    List<Map<String, Object>> getUsersCountFollow(String uerId);
     // 获得在redis中存在的用户关注个数
-    Long getSingleUserCountFollowed(String userId);
+    Long getSingleUserCountFollow(String userId);
     // 判断用户对postId关注状态
-    Boolean getCurrentUserFollowedState(String userId, String postId);
+    Boolean getCurrentUserFollowState(String userId, String postId);
     List<Map<String, Object>> getUserBeFollowedInfo(String userId);
     // 判断某一个用户的关注信息是否存在Redis中
     boolean existRedisKey(String userId);

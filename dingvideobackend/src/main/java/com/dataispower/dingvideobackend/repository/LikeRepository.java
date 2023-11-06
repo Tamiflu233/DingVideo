@@ -11,7 +11,7 @@ import java.util.List;
  * date:2023/11/6 16:41
  * description：用户点赞JPA接口
  **/
-public interface UserLikeRepository extends JpaRepository<UserLike, Long> {
+public interface LikeRepository extends JpaRepository<UserLike, Long> {
     // 根据用户id和postId返回点赞列表
     UserLike findUserLikeByUserIdAndPostId(String userId, String postId);
     List<UserLike> findUserLikeByPostId(String postId);

@@ -19,8 +19,6 @@ public interface VideoRepository extends JpaRepository<Video, Long> {
 
     List<Video> findVideosByUser(User user);
 
-    List<Video> findVideosByUserAndRemark(User user, Integer Remark);
-
     Video findVideoByVideoId(String videoId);
 
     @Modifying
@@ -34,6 +32,8 @@ public interface VideoRepository extends JpaRepository<Video, Long> {
     List<Video> findVideosByCoverUrl(String coverUrl);
     void deleteVideoByVideoId(String videoId);
 
-    //    批量查找视频
+    // 批量查找视频
     List<Video> findVideosByVideoIdIn(List<String> videoIds);
+    // 根据类别查找视频
+    List<Video> getVideosByCategory(String kind);
 }
