@@ -3,11 +3,12 @@ package com.dataispower.dingvideobackend.service.interfaces;
 import com.dataispower.dingvideobackend.entity.UserFollow;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * author:heroding
  * date:2023/11/6 15:54
- * description：关注服务
+ * description：关注服务接口
  **/
 public interface FollowService {
     // 保存关注记录

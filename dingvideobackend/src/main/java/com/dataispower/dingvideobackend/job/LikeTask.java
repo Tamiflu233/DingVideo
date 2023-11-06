@@ -1,6 +1,7 @@
 package com.dataispower.dingvideobackend.job;
 
 import com.dataispower.dingvideobackend.service.interfaces.LikeService;
+import com.dataispower.dingvideobackend.service.interfaces.RedisLikeService;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -21,7 +22,7 @@ public class LikeTask extends QuartzJobBean {
     @Autowired
     LikeService likeService;
     @Autowired
-    RedisLikedService redisLikedService;
+    RedisLikeService redisLikeService;
 
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
@@ -29,7 +30,7 @@ public class LikeTask extends QuartzJobBean {
     protected void executeInternal(JobExecutionContext jobExecutionContext) throws JobExecutionException {
         likeService.saveLikesCountFromRedis();
         likeService.saveLikesFromRedis();
-        redisLikedService.deleteRedis();
+        redisLikeService.deleteRedis();
         log.info("LikeTask-------- {}", sdf.format(new Date()));
 
         //将 Redis 里的点赞信息同步到数据库里

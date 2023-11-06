@@ -1,5 +1,6 @@
 package com.dataispower.dingvideobackend.job;
 
+import com.dataispower.dingvideobackend.service.interfaces.CollectService;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -19,7 +20,7 @@ public class CollectTask extends QuartzJobBean {
     @Autowired
     CollectService collectService;
     @Autowired
-    RedisCollectedService redisCollectedService;
+    RedisCollectService redisCollectedService;
 
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
@@ -28,7 +29,7 @@ public class CollectTask extends QuartzJobBean {
     protected void executeInternal(JobExecutionContext context) throws JobExecutionException {
         collectService.saveCollectsFromRedis();
         collectService.saveCollectsCountFromRedis();
-        redisCollectedService.deleteRedis();
+        redisCollectService.deleteRedis();
         log.info("LikeTask-------- {}", sdf.format(new Date()));
     }
 }

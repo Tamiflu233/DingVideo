@@ -1,9 +1,9 @@
 package com.dataispower.dingvideobackend.config;
 
-import org.quartz.JobBuilder;
-import org.quartz.JobDetail;
-import org.quartz.SimpleScheduleBuilder;
-import org.quartz.TriggerBuilder;
+import com.dataispower.dingvideobackend.job.CollectTask;
+import com.dataispower.dingvideobackend.job.FollowTask;
+import com.dataispower.dingvideobackend.job.LikeTask;
+import org.quartz.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

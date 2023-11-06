@@ -8,7 +8,7 @@ import java.util.Map;
 /**
  * author:heroding
  * date:2023/11/6 15:54
- * description：
+ * description：收藏服务接口
  **/
 public interface CollectService {
 
