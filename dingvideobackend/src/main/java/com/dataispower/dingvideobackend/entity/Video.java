@@ -68,13 +68,7 @@ public class Video {
     @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = USERID)
     private User user;
-    @CreationTimestamp
-    @Column(name = CREATE_TIME)
-    private Date createTime;
-
-    @UpdateTimestamp
-    @Column(name = UPDATE_TIME)
-    private Date updateTime;
+ 
 
 
 }
