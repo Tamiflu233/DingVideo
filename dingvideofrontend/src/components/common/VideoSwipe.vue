@@ -63,8 +63,8 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, onUnmounted,ref } from 'vue'
-import { VideoInfo } from "@/types/videoInfo"
+import { watchEffect,watch, onMounted, onUnmounted,ref } from 'vue'
+import { VideoDetail } from "@/types/videoInfo"
 import videojs from "video.js"
 import Player from 'video.js/dist/types/player'
 import "video.js/dist/video-js.css"
@@ -92,7 +92,7 @@ function onCloseComment() {
 // 接受传入的视频列表和当前页号
 const props = defineProps({
   videos: {
-    type: Array as PropType<VideoInfo[]>,
+    type: Array as PropType<VideoDetail[]>,
     required: true
   },
   current : {
@@ -107,11 +107,40 @@ const video3PauseShow = ref(true)
 // 视频轮播器
 const videoSwipe = ref();
 // 视频列表
-const videoQueue: { current: number; queue: VideoInfo[] } = reactive({
+const videoQueue: { current: number; queue: VideoDetail[] } = reactive({
   current: props.current,
   queue: props.videos
 })
+function refreshVideos() {
+  myPlayer1.value.poster(videoQueue.queue[videoQueue.current % videoQueue.queue.length].coverUrl)
+  myPlayer2.value.poster(videoQueue.queue[(videoQueue.current + 1) % videoQueue.queue.length].coverUrl)
+  myPlayer3.value.poster(videoQueue.queue[(videoQueue.current + 2) % videoQueue.queue.length].coverUrl)
+  
+  myPlayer1.value.src(videoQueue.queue[videoQueue.current % videoQueue.queue.length].videoUrl)
+  myPlayer2.value.src(videoQueue.queue[(videoQueue.current + 1) % videoQueue.queue.length].videoUrl)
+  myPlayer3.value.src(videoQueue.queue[(videoQueue.current + 2) % videoQueue.queue.length].videoUrl)
+  videoSwipe.value.swipeTo(0,{"immediate": true})
+}
+// 如果页面不销毁，需要监听props变化
 
+watch(
+  () => props.videos,
+  async (newVideos) => {
+    videoQueue.queue = newVideos;
+    refreshVideos()
+    
+  },
+  { immediate: true }
+);
+watch(
+  () => props.current,
+  async (newCurrent) => {
+    videoQueue.current = newCurrent;
+    refreshVideos()
+    
+  },
+  { immediate: true }
+);
 // 视频播放器
 const videoPlayer1 = ref()
 const videoPlayer2 = ref()
@@ -125,7 +154,7 @@ let oldcover:string = "";
 
 */
 function video1Play(){
-  console.log("开始播放....");
+
   if(video1PauseShow.value === true) {
     myPlayer1.value.play();
     setTimeout(() => {
@@ -135,7 +164,7 @@ function video1Play(){
 
 }
 function video1Pause(){
-  console.log("videoPause....");
+
   if(video1PauseShow.value === false) {
     myPlayer1.value.pause();
     setTimeout(() => {
@@ -145,7 +174,7 @@ function video1Pause(){
 
 }
 function video2Play(){
-  console.log("开始播放....");
+
   if(video2PauseShow.value === true) {
     myPlayer2.value.play();
     setTimeout(() => {
@@ -155,7 +184,7 @@ function video2Play(){
 
 }
 function video2Pause(){
-  console.log("videoPause....");
+
   if(video2PauseShow.value === false) {
     myPlayer2.value.pause();
     setTimeout(() => {
@@ -165,7 +194,7 @@ function video2Pause(){
 
 }
 function video3Play(){
-  console.log("开始播放....");
+
   if(video3PauseShow.value === true) {
     myPlayer3.value.play();
     setTimeout(() => {
@@ -175,7 +204,7 @@ function video3Play(){
 
 }
 function video3Pause(){
-  console.log("videoPause....");
+
   if(video3PauseShow.value === false) {
     myPlayer3.value.pause();
     setTimeout(() => {
@@ -188,15 +217,15 @@ function video3Pause(){
 // 切换视频函数
 const videoSet = (index:number,playerId:number) => {
   if(playerId === 1) {
-    myPlayer1.value.poster(videoQueue.queue[index].poster)
-    myPlayer1.value.src(videoQueue.queue[index].src)
+    myPlayer1.value.poster(videoQueue.queue[index].coverUrl)
+    myPlayer1.value.src(videoQueue.queue[index].videoUrl)
   } else if(playerId === 2) {
-    myPlayer2.value.poster(videoQueue.queue[index].poster)
-    myPlayer2.value.src(videoQueue.queue[index].src)
+    myPlayer2.value.poster(videoQueue.queue[index].coverUrl)
+    myPlayer2.value.src(videoQueue.queue[index].videoUrl)
   }
   else if(playerId === 3) {
-    myPlayer3.value.poster(videoQueue.queue[index].poster)
-    myPlayer3.value.src(videoQueue.queue[index].src)
+    myPlayer3.value.poster(videoQueue.queue[index].coverUrl)
+    myPlayer3.value.src(videoQueue.queue[index].videoUrl)
   }
 }
 // 开始页数
@@ -205,7 +234,7 @@ let startIndex: number = 0;
 let nextIndex: number = 0;
 function onChange(index: number) {
   isShowComment.value = false;
-  console.log("参数是"+index);
+
   if(index === 0) {
     video1Play()
     video2Pause()
@@ -224,7 +253,7 @@ function onChange(index: number) {
 }
 /* 开始拖拽轮播item */
 function onDragStart(args:{index: number}) {
-  console.log("DragStart"+args.index);
+
   startIndex = args.index;
   if(args.index === 2) {
 
@@ -244,20 +273,20 @@ function onDragEnd(args:{index: number}) {
     视频翻页修改
   
   */
-  console.log("DragEnd"+args.index);
+
   if (args.index === startIndex + 1 || (startIndex === 2 && args.index === 0)) {
     // 向下翻页
     if (videoQueue.current <= videoQueue.queue.length - 1) {
       videoQueue.current = (videoQueue.current + 1 + videoQueue.queue.length) % videoQueue.queue.length;
 
       if(args.index === 0) {
-        myPlayer1.value.poster(videoQueue.queue[videoQueue.current % videoQueue.queue.length].poster)
-        myPlayer2.value.poster(videoQueue.queue[(videoQueue.current + 1) % videoQueue.queue.length].poster)
-        myPlayer3.value.poster(videoQueue.queue[(videoQueue.current + 2) % videoQueue.queue.length].poster)
+        myPlayer1.value.poster(videoQueue.queue[videoQueue.current % videoQueue.queue.length].coverUrl)
+        myPlayer2.value.poster(videoQueue.queue[(videoQueue.current + 1) % videoQueue.queue.length].coverUrl)
+        myPlayer3.value.poster(videoQueue.queue[(videoQueue.current + 2) % videoQueue.queue.length].coverUrl)
         
-        myPlayer1.value.src(videoQueue.queue[videoQueue.current % videoQueue.queue.length].src)
-        myPlayer2.value.src(videoQueue.queue[(videoQueue.current + 1) % videoQueue.queue.length].src)
-        myPlayer3.value.src(videoQueue.queue[(videoQueue.current + 2) % videoQueue.queue.length].src)
+        myPlayer1.value.src(videoQueue.queue[videoQueue.current % videoQueue.queue.length].videoUrl)
+        myPlayer2.value.src(videoQueue.queue[(videoQueue.current + 1) % videoQueue.queue.length].videoUrl)
+        myPlayer3.value.src(videoQueue.queue[(videoQueue.current + 2) % videoQueue.queue.length].videoUrl)
       }
     }
   } else if (args.index === startIndex - 1 || (startIndex === 0 && args.index === 2)) {
@@ -267,16 +296,16 @@ function onDragEnd(args:{index: number}) {
       videoQueue.current = (videoQueue.current - 1 + videoQueue.queue.length) % videoQueue.queue.length;
       
       if(args.index === 2) {
-        myPlayer1.value.poster(videoQueue.queue[(videoQueue.current -2) % videoQueue.queue.length].poster)
-        myPlayer2.value.poster(videoQueue.queue[(videoQueue.current-1) % videoQueue.queue.length].poster)
-        myPlayer3.value.poster(videoQueue.queue[(videoQueue.current) % videoQueue.queue.length].poster)
-        myPlayer1.value.src(videoQueue.queue[(videoQueue.current - 2) % videoQueue.queue.length].src)
-        myPlayer2.value.src(videoQueue.queue[(videoQueue.current - 1) % videoQueue.queue.length].src)
-        myPlayer3.value.src(videoQueue.queue[(videoQueue.current) % videoQueue.queue.length].src)
+        myPlayer1.value.poster(videoQueue.queue[(videoQueue.current -2) % videoQueue.queue.length].coverUrl)
+        myPlayer2.value.poster(videoQueue.queue[(videoQueue.current-1) % videoQueue.queue.length].coverUrl)
+        myPlayer3.value.poster(videoQueue.queue[(videoQueue.current) % videoQueue.queue.length].coverUrl)
+        myPlayer1.value.src(videoQueue.queue[(videoQueue.current - 2) % videoQueue.queue.length].videoUrl)
+        myPlayer2.value.src(videoQueue.queue[(videoQueue.current - 1) % videoQueue.queue.length].videoUrl)
+        myPlayer3.value.src(videoQueue.queue[(videoQueue.current) % videoQueue.queue.length].videoUrl)
       }
     }
   }
-  console.log("页号"+videoQueue.current)
+
     /* 
       临时修改视频封面
     
@@ -286,11 +315,10 @@ function onDragEnd(args:{index: number}) {
 
   } else if(args.index === 2) {
     oldcover = myPlayer1.value.poster();
-    console.log("新封面"+videoQueue.queue[(videoQueue.current + 1) % videoQueue.queue.length].poster);
     
     
   }
-  console.log("封面:"+oldcover);
+
 
   
 }
@@ -301,17 +329,16 @@ let handleKeydown:any;
 function nextPage() {
     videoQueue.current = (videoQueue.current + 1 + videoQueue.queue.length) % videoQueue.queue.length;
     nextIndex = (startIndex + 1 + 3) % 3;
-    console.log(`从第${startIndex}页到第${nextIndex}页`);
+
     if(startIndex == 2 && nextIndex === 0) {
-      console.log("2到0拉");
-      console.log(`videoQueue.current = ${videoQueue.current}`);
-      myPlayer1.value.poster(videoQueue.queue[videoQueue.current % videoQueue.queue.length].poster)
-      myPlayer2.value.poster(videoQueue.queue[(videoQueue.current + 1) % videoQueue.queue.length].poster)
-      myPlayer3.value.poster(videoQueue.queue[(videoQueue.current + 2) % videoQueue.queue.length].poster)
+
+      myPlayer1.value.poster(videoQueue.queue[videoQueue.current % videoQueue.queue.length].coverUrl)
+      myPlayer2.value.poster(videoQueue.queue[(videoQueue.current + 1) % videoQueue.queue.length].coverUrl)
+      myPlayer3.value.poster(videoQueue.queue[(videoQueue.current + 2) % videoQueue.queue.length].coverUrl)
       
-      myPlayer1.value.src(videoQueue.queue[videoQueue.current % videoQueue.queue.length].src)
-      myPlayer2.value.src(videoQueue.queue[(videoQueue.current + 1) % videoQueue.queue.length].src)
-      myPlayer3.value.src(videoQueue.queue[(videoQueue.current + 2) % videoQueue.queue.length].src)
+      myPlayer1.value.src(videoQueue.queue[videoQueue.current % videoQueue.queue.length].videoUrl)
+      myPlayer2.value.src(videoQueue.queue[(videoQueue.current + 1) % videoQueue.queue.length].videoUrl)
+      myPlayer3.value.src(videoQueue.queue[(videoQueue.current + 2) % videoQueue.queue.length].videoUrl)
     }
     videoSwipe.value.next();
 
@@ -322,16 +349,15 @@ function nextPage() {
 function prevPage() {
   videoQueue.current = (videoQueue.current - 1 + videoQueue.queue.length) % videoQueue.queue.length;
   nextIndex = (startIndex - 1 + 3) % 3;
-  console.log(`从第${startIndex}页到第${nextIndex}页`);
+
   if (startIndex == 0 && nextIndex === 2) {
-    console.log("0到2拉");
-    console.log(`videoQueue.current = ${videoQueue.current}`);
-    myPlayer1.value.poster(videoQueue.queue[(videoQueue.current -2) % videoQueue.queue.length].poster)
-    myPlayer2.value.poster(videoQueue.queue[(videoQueue.current-1) % videoQueue.queue.length].poster)
-    myPlayer3.value.poster(videoQueue.queue[(videoQueue.current) % videoQueue.queue.length].poster)
-    myPlayer1.value.src(videoQueue.queue[(videoQueue.current - 2) % videoQueue.queue.length].src)
-    myPlayer2.value.src(videoQueue.queue[(videoQueue.current - 1) % videoQueue.queue.length].src)
-    myPlayer3.value.src(videoQueue.queue[(videoQueue.current) % videoQueue.queue.length].src)
+
+    myPlayer1.value.poster(videoQueue.queue[(videoQueue.current -2) % videoQueue.queue.length].coverUrl)
+    myPlayer2.value.poster(videoQueue.queue[(videoQueue.current-1) % videoQueue.queue.length].coverUrl)
+    myPlayer3.value.poster(videoQueue.queue[(videoQueue.current) % videoQueue.queue.length].coverUrl)
+    myPlayer1.value.src(videoQueue.queue[(videoQueue.current - 2) % videoQueue.queue.length].videoUrl)
+    myPlayer2.value.src(videoQueue.queue[(videoQueue.current - 1) % videoQueue.queue.length].videoUrl)
+    myPlayer3.value.src(videoQueue.queue[(videoQueue.current) % videoQueue.queue.length].videoUrl)
   }
   videoSwipe.value.prev();
 
@@ -345,6 +371,10 @@ function next() {
   nextPage();
 }
 onMounted(() => {
+  console.log(`props:${props}`);
+  
+  console.log(`传入的current: ${props.current}`);
+  console.log(`传入的videos${props.videos}`);
   
   myPlayer1.value = videojs(videoPlayer1.value, {
     // autoplay: true,
@@ -360,8 +390,8 @@ onMounted(() => {
     playbackRates: [0.5, 1, 1.5, 2]
   }, () => {
     // myPlayer.value.poster("https://rl.shuishan.net.cn/ef3005a0bc2f71ed90a40764a0fd0102/snapshots/358d95a124ff421382624687fe348c0c-00001.jpg")
-    videoSet(0,1)
-    console.log("启动1！");
+    videoSet(videoQueue.current,1)
+
     
   })
   myPlayer2.value = videojs(videoPlayer2.value, {
@@ -378,8 +408,9 @@ onMounted(() => {
     playbackRates: [0.5, 1, 1.5, 2]
   }, () => {
     // myPlayer.value.poster("https://rl.shuishan.net.cn/ef3005a0bc2f71ed90a40764a0fd0102/snapshots/358d95a124ff421382624687fe348c0c-00001.jpg")
-    videoSet(1,2)
-    console.log("启动2！");
+    videoSet((videoQueue.current+1 + videoQueue.queue.length) % videoQueue.queue.length,2)
+
+
   })
   myPlayer3.value = videojs(videoPlayer3.value, {
     // autoplay: true,
@@ -395,8 +426,8 @@ onMounted(() => {
     playbackRates: [0.5, 1, 1.5, 2]
   }, () => {
     // myPlayer.value.poster("https://rl.shuishan.net.cn/ef3005a0bc2f71ed90a40764a0fd0102/snapshots/358d95a124ff421382624687fe348c0c-00001.jpg")
-    videoSet(2,3)
-    console.log("启动3！");
+    videoSet((videoQueue.current+2 + videoQueue.queue.length) % videoQueue.queue.length,3)
+
   })
   /* 
     监听滚轮翻页

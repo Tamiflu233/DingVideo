@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-
+import {globalStore} from '@/store/global/global';
 const history = createWebHistory()
 const routes: Array<RouteRecordRaw> = [
   {
@@ -62,7 +62,7 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
 
-    path: '/detail',
+    path: '/detail/:kind/:index',
     name: 'detail',
     component: () => import('@/views/detail/VideoDetail.vue'),
     meta: {
@@ -85,7 +85,10 @@ const router = createRouter({
   routes
 })
 router.beforeEach((to, from, next) => {
+  const store = globalStore();
   document.title = to.meta.title as string
-  next()
+  // 根据当前url更新side menu的index
+  store.updateSideBarIndexFromUrl(to.path,to.query);
+  next();
 })
 export default router
