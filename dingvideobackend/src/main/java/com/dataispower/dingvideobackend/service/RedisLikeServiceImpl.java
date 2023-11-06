@@ -1,6 +1,6 @@
 package com.dataispower.dingvideobackend.service;
 
-import com.dataispower.dingvideobackend.dto.UserLike;
+import com.dataispower.dingvideobackend.entity.UserLike;
 import com.dataispower.dingvideobackend.service.interfaces.CommentService;
 import com.dataispower.dingvideobackend.service.interfaces.RedisLikeService;
 import com.dataispower.dingvideobackend.util.RedisLikeKeyUtil;

@@ -17,13 +17,13 @@ import static com.dataispower.dingvideobackend.common.TableColumns.VIDEO.*;
 @Table(name = com.dataispower.dingvideobackend.common.TableColumns.VIDEO)
 public class Video {
     @Id
-    @Column(name = VIDEOID, unique = true)
+    @Column(name = VIDEO_ID, unique = true)
     private String videoId;
 
-    @Column(name = VIDEOPATH, columnDefinition = "text", unique = true)
+    @Column(name = VIDEO_PATH, columnDefinition = "text", unique = true)
     private String videoUrl;
 
-    @Column(name = COVERURL, columnDefinition = "text")
+    @Column(name = COVER_URL, columnDefinition = "text")
     private String coverUrl;
 
     @Column(name = TITLE, columnDefinition = "text")

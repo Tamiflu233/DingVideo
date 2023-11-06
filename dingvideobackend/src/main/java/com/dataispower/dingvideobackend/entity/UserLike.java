@@ -1,9 +1,12 @@
-package com.dataispower.dingvideobackend.dto;
+package com.dataispower.dingvideobackend.entity;
 
-import com.dataispower.dingvideobackend.entity.CommonEntity;
 import lombok.Data;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Table;
+
+import static com.dataispower.dingvideobackend.common.TableColumns.USER_LIKE.*;
 
 /**
  * author:heroding
@@ -12,17 +15,22 @@ import javax.persistence.Entity;
  **/
 @Data
 @Entity
+@Table(name = com.dataispower.dingvideobackend.common.TableColumns.USER_LIKE)
 public class UserLike extends CommonEntity {
-
     // 用户id
+    @Column(name = USER_ID)
     private String userId;
     // 视频id
+    @Column(name = POST_ID)
     private String postId;
     // 点赞状态
+    @Column(name = STATUS)
     private Integer status;
-    // 点赞类型，type（0：视频；1：评论；2：问答）
+    // 点赞类型，type（0：视频；1：评论）
+    @Column(name = TYPE)
     private String type;
-    // 评论和问答所属的视频
+    // 评论所属的视频
+    @Column(name = VIDEO_ID)
     private String videoId;
 
     public UserLike() {

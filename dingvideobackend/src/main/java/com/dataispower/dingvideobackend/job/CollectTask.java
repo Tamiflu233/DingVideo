@@ -1,6 +1,7 @@
 package com.dataispower.dingvideobackend.job;
 
 import com.dataispower.dingvideobackend.service.interfaces.CollectService;
+import com.dataispower.dingvideobackend.service.interfaces.RedisCollectService;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -20,7 +21,7 @@ public class CollectTask extends QuartzJobBean {
     @Autowired
     CollectService collectService;
     @Autowired
-    RedisCollectService redisCollectedService;
+    RedisCollectService redisCollectService;
 
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 

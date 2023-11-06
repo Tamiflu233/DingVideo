@@ -1,6 +1,6 @@
 package com.dataispower.dingvideobackend.service.interfaces;
 
-import com.dataispower.dingvideobackend.dto.UserFollow;
+import com.dataispower.dingvideobackend.entity.UserFollow;
 
 import java.util.List;
 import java.util.Map;

@@ -22,7 +22,7 @@ import static com.dataispower.dingvideobackend.common.TableColumns.USER.*;
 @Table(name = com.dataispower.dingvideobackend.common.TableColumns.USER)
 public class User extends CommonEntity implements UserDetails {
     @Id
-    @Column(name = USERID, unique = true)
+    @Column(name = USER_ID, unique = true)
     private Long id;
     @Column(name = USERNAME, unique = true)
     private String username;

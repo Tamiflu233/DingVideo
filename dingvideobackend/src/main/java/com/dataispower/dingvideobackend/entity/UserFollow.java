@@ -1,11 +1,11 @@
-package com.dataispower.dingvideobackend.dto;
+package com.dataispower.dingvideobackend.entity;
 
-import com.dataispower.dingvideobackend.entity.CommonEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 /**
  * author:heroding
@@ -16,6 +16,7 @@ import javax.persistence.Entity;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = com.dataispower.dingvideobackend.common.TableColumns.USER_FOLLOW)
 public class UserFollow extends CommonEntity {
     // 用户id
     private String userId;

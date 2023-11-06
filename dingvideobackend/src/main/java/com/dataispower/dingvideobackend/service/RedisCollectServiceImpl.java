@@ -1,6 +1,6 @@
 package com.dataispower.dingvideobackend.service;
 
-import com.dataispower.dingvideobackend.dto.UserCollect;
+import com.dataispower.dingvideobackend.entity.UserCollect;
 import com.dataispower.dingvideobackend.service.interfaces.RedisCollectService;
 import com.dataispower.dingvideobackend.util.RedisCollectKeyUtil;
 import org.springframework.beans.factory.annotation.Autowired;
