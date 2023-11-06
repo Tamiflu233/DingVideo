@@ -16,7 +16,7 @@ spring:
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
   redis:
-    database: 1
+    database: 0
     host: 101.132.188.137
     port: 6380
     password: '000415'
@@ -27,3 +27,6 @@ spring:
         max-idle: 8
         min-idle: 0
     timeout: 10000
+  data:
+    mongodb:
+      uri: mongodb://tamiflu233:Dase1101@101.132.188.137:27017/ding_video

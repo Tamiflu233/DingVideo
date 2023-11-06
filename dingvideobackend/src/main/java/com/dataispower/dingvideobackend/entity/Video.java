@@ -16,20 +16,20 @@ import static com.dataispower.dingvideobackend.common.TableColumns.VIDEO.*;
 /**
  * author:heroding
  * date:2023/11/1 14:39
- * description：视频信息
+ * description：视频信息表
  **/
 @Data
 @Entity
 @Table(name = com.dataispower.dingvideobackend.common.TableColumns.VIDEO)
 public class Video {
     @Id
-    @Column(name = VIDEOID, unique = true)
+    @Column(name = VIDEO_ID, unique = true)
     private String videoId;
 
-    @Column(name = VIDEOPATH, columnDefinition = "text", unique = true)
+    @Column(name = VIDEO_PATH, columnDefinition = "text", unique = true)
     private String videoUrl;
 
-    @Column(name = COVERURL, columnDefinition = "text")
+    @Column(name = COVER_URL, columnDefinition = "text")
     private String coverUrl;
 
     @Column(name = TITLE, columnDefinition = "text")
@@ -55,11 +55,6 @@ public class Video {
     @Transient
     private Boolean isLiked;
 
-    @Column(name = USERID,insertable=false,updatable=false)
-    private Long useId;
-    @ManyToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name = USERID)
-    private User user;
     @CreationTimestamp
     @Column(name = CREATE_TIME)
     private Date createTime;
@@ -67,6 +62,13 @@ public class Video {
     @UpdateTimestamp
     @Column(name = UPDATE_TIME)
     private Date updateTime;
+
+    @Column(name = USERID, insertable=false, updatable=false)
+    private Long useId;
+    @ManyToOne(cascade=CascadeType.ALL)
+    @JoinColumn(name = USERID)
+    private User user;
+ 
 
 
 }
