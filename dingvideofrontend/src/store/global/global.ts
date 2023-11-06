@@ -33,7 +33,7 @@ export const globalStore = defineStore("global", {
             this.setSideBarIndex(5);
           }else if(kind === "food") {
             this.setSideBarIndex(6);
-          }else if(kind === "movie") {
+          }else if(kind === "pet") {
             this.setSideBarIndex(7);
           }else if(kind === "fashion") {
             this.setSideBarIndex(8);
