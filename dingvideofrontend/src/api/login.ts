@@ -28,13 +28,11 @@ export const getRegister: requestModel = (data?: any) => request({
 });
 
   
-// 由id获取用户信息
-export const getUserInfoById: requestModel = (data?: any) => request({
-  url: `${baseUrl}/info`,
+// 获取用户信息
+export const getUserInfo: requestModel = () => request({
+  url: '/info',
   method: 'get',
-  params: {
-    id: data.id
-  }
+  
 });
 
 // 退出登录
