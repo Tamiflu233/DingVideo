@@ -3,7 +3,7 @@
     <div class="info" style="width: 500px;margin-top: 10px;">
       <!-- 卡片头部 -->
       <el-row style="align-items: center;width: 500px;">
-        <a :href="`/user/index/${videoInfo.userId}`">
+        <a :href="`/user/index/${videoInfo.user?.id}`">
           <el-avatar :size="70" :src="videoInfo.user?.avatar" size="large"></el-avatar>
         </a>
         <!--                        <div class="username">{{ }}</div>-->

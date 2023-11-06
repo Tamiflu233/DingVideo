@@ -21,6 +21,12 @@ public class VideoServiceImpl implements VideoService {
     }
 
     @Override
+    public List<Video> getHomeVideos() {
+        List<Video> videos = videoRepository.findAllRandomOrder();
+        return videos;
+    }
+
+    @Override
     public List<Video> getVideoListByUserIdAndType(Integer userid, Integer type) {
         List<Video> videos = videoRepository.getVideosByUserId(Long.valueOf(userid));
         return videos;

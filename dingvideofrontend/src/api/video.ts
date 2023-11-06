@@ -12,7 +12,12 @@ export const getCategoryVideos: requestModel = (data?: any) => request({
         kind: data.kind
     }
 });
-
+// 获取推荐视频
+export const getHomeVideos: requestModel = (data?: any) => request({
+    url: `${baseUrl}/home`,
+    method: 'get',
+    
+});
 export const getVideoByUserIdAndType: requestModel = (data?: any) => request({
     url: `${baseUrl}/person`,
     method: 'get',

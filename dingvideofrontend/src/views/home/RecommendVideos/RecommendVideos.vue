@@ -2,17 +2,23 @@
 <template>
   <div class="recommend-video-layout">
     <VideoSwipe
-      :current="current"
-      :videos="queue"
+      :current="0"
+      :videos="store.videosBuffer"
     >
 
     </VideoSwipe>
   </div>
 </template>
 <script setup lang="ts">
+import {watchEffect,onMounted,onUnmounted} from 'vue'
 import { VideoDetail } from "@/types/videoInfo"
 const VideoSwipe = defineAsyncComponent(() => import("@/components/common/VideoSwipe.vue"))
-let current:number =  0;
+import {getHomeVideos} from '@/api/video';
+import { videoStore } from "@/store/videos/videos";
+import {useRoute} from 'vue-router'
+// 视频缓存池
+const store = videoStore();
+const route = useRoute()
 let queue:VideoDetail[] =  [
   {
     "coverUrl": "https://rl.shuishan.net.cn/65c00ff5d52643ada373ae67fc5258a7/snapshots/e13c8454edf740f383876e05249023ea-00005.jpg",
@@ -219,7 +225,37 @@ let queue:VideoDetail[] =  [
 			"updateTime": "2023-11-06T06:50:31.000+00:00"
   }
 ]
+/* 视频信息列表 */
+const videoList = reactive([
 
+])
+/* 获取当前类别的视频信息 */
+const getCurrentVideos = async () => {
+
+  const res = await getHomeVideos();
+  videoList.splice(0, videoList.length, ...(res.data as never[]));
+	console.log(`共${videoList.length}个视频`);
+
+	
+  store.setVideosBuffer(videoList);
+}
+// watch(route, async (newRoute, oldRoute) => {
+// 	console.log(":asdasd");
+	
+//   // 在这里执行你需要的操作
+//   await getCurrentVideos()
+// })
+const stopWatch = watchEffect(async () => {
+	console.log(`路由${route.name}`);
+	
+      if (route.name === 'RecommendVideos') {
+				
+        await getCurrentVideos()
+      }
+})
+onUnmounted(() => {
+	stopWatch()
+})
 </script>
 
 

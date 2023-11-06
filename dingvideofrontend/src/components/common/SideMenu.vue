@@ -40,7 +40,6 @@ const selected = ref(store.sideBarIndex)
 // 分类索引表
 let cateMap:string[] = [
   'home',
-  'recommend',
   'hot',
   'sports',
   'knowledge',

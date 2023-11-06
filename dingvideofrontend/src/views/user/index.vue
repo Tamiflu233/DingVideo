@@ -46,7 +46,7 @@
 
 <script lang="ts" setup>
 import { getUserInfoById } from "@/api/login.js";
-import {onMounted, ref} from "vue";
+import {watch,onMounted, ref} from "vue";
 import {useRoute} from "vue-router";
 import {getVideoByUserIdAndType} from "@/api/video";
 
@@ -116,6 +116,16 @@ const Toggle = async () => {
 }
 const resize = () => {
 }
+watch(
+  () => route.params.id,
+  async (newUserId) => {
+    await getUserInfo()
+    await Toggle()
+    resize()
+    
+  },
+  { immediate: true }
+);
 onMounted(async () => {
   await getUserInfo()
   await Toggle()
@@ -138,7 +148,9 @@ onMounted(async () => {
   /*!*right: 0;*!*/
   /*margin-left: ;*/
   margin-top: 20px;
-  margin-left: 700px;
+  margin-left: 650px;
+  
+  
 }
 
 .checkBox {

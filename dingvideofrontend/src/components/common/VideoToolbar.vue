@@ -8,7 +8,7 @@
         <ArrowDownBold />
       </el-icon>
     </div>
-    <div class="avatar">
+    <div class="avatar" @click="toUserCenter">
       <el-avatar :size="70" :src="videoInfo.user?.avatar"></el-avatar>
     </div>
     <IconButton
@@ -55,6 +55,8 @@
 <script setup lang="ts">
 import { ref,reactive } from 'vue';
 import { VideoDetail } from "@/types/videoInfo";
+import {useRouter} from 'vue-router';
+const router = useRouter();
 //  视频信息
 const props = defineProps({
   videoInfo: {
@@ -77,6 +79,9 @@ const emit = defineEmits(['prev', 'next','toggleLike','toggleComment','toggleCol
 /* 切换上一页，下一页 */
 function prevPage() {
   emit('prev');
+}
+function toUserCenter() {
+  router.push({path: `/user/index/${props.videoInfo.user?.id}`})
 }
 function nextPage() {
   emit('next');
