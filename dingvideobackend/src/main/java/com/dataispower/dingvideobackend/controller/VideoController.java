@@ -24,17 +24,20 @@ public class VideoController {
     private VideoService videoService;
     @GetMapping("/category")
     public ResponseResult getCategoryVideo(@RequestParam String kind) {
-        ResponseResult res = new ResponseResult();
-        List<Video> videos = videoService.getVideoList(kind);
-        Map<String, Object> data = new HashMap<>();
-        if (videos != null) {
-            data.put("videoInfo", videos);
-            res.setData(data);
-        } else {
-            res.setResult("false");
-            res.setMessage("获取视频失败");
+        try {
+            List<Video> videos = videoService.getVideoList(kind);
+            Map<String, Object> data = new HashMap<>();
+            if (videos != null) {
+                return ResponseResult.success("获取视频成功", videos);
+            } else {
+                return ResponseResult.error("获取视频失败");
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseResult.error("获取视频失败");
         }
-        return res;
+
     }
 
     /**
