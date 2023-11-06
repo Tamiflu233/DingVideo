@@ -26,43 +26,43 @@ const NavHeader = defineAsyncComponent(() => import("@/components/common/NavHead
 // 左侧菜单分类按钮列表,是对象数组，每个对象包含icon和title两个属性
 const menuItems = ref<MenuItem[]>([
   {
-    icon: "house",
+    icon: "solar:home-bold",
     title: "首页",
   },
   {
-    icon: "trophy",
+    icon: "mdi:hot",
     title: "热门",
   },
   {
-    icon: "football",
+    icon: "fluent-mdl2:more-sports",
     title: "体育",
   },
   {
-    icon: "reading",
+    icon: "fluent-mdl2:reading-mode",
     title: "知识",
   },
   {
-    icon: "SwitchFilled",
+    icon: "fluent-mdl2:game",
     title: "游戏",
   },
   {
-    icon: "MagicStick",
+    icon: "icon-park-outline:entertainment",
     title: "娱乐",
   },
   {
-    icon: "food",
+    icon: "ep:food",
     title: "美食",
   },
   {
-    icon: "VideoCameraFilled",
-    title: "电影",
+    icon: "streamline:nature-ecology-dog-head-dog-pet-animals-canine",
+    title: "宠物",
   },
   {
-    icon: "ShoppingBag",
+    icon: "mdi:shopping-outline",
     title: "时尚",
   },
   {
-    icon: "promotion",
+    icon: "solar:tv-broken",
     title: "动漫",
   },
 ]);

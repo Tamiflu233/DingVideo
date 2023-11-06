@@ -6,7 +6,9 @@
     <div class="menu-item" v-for="(item, index) in items" :key="index"  @click="selectItem(index)">
       <div class="menu-item-wrapper" :class="{ 'selected': selected === index }">
         <el-icon class="menu-item-icon" :size="25">
-        <component :is="item.icon"></component>
+        <iconify-icon 
+          :icon="item.icon"
+          />
         </el-icon >
         <div class="menu-item-title">
           {{item.title}}
@@ -22,6 +24,7 @@ import { ref } from 'vue'
 import { MenuItem } from "@/types/sidemenu"
 import { useRouter } from "vue-router";
 import { globalStore } from "@/store/global/global";
+import 'iconify-icon';
 // 全局状态管理
 const store = globalStore();
 // 路由控制
@@ -46,7 +49,7 @@ let cateMap:string[] = [
   'game',
   'entertainment',
   'food',
-  'movie',
+  'pet',
   'fashion',
   'animation'
 ]
