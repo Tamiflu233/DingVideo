@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface VideoRepository extends JpaRepository<Video, String> {
     List<Video> getVideosByCategory(String kind);
+    List<Video> getVideosByUserId(Long userid);
 }
