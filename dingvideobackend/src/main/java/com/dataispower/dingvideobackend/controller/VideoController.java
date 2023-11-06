@@ -36,4 +36,26 @@ public class VideoController {
         }
         return res;
     }
+
+    /**
+     * 查找该userid的某种类型(作品、收藏、点赞)的视频
+     * @param userid
+     * @param type
+     * @return
+     */
+    @GetMapping("/person")
+    public ResponseResult getVideoByUserIdAndType(@RequestParam Integer userid, @RequestParam Integer type) {
+        ResponseResult res = new ResponseResult();
+        List<Video> videos = videoService.getVideoListByUserIdAndType(userid, type);
+        System.out.println(videos.size());
+        Map<String, Object> data = new HashMap<>();
+        if (videos != null) {
+            data.put("videoInfo", videos);
+            res.setData(data);
+        } else {
+            res.setResult("false");
+            res.setMessage("获取视频失败");
+        }
+        return res;
+    }
 }
