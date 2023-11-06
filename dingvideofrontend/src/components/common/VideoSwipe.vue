@@ -660,8 +660,8 @@ onUnmounted(() => {
 .video-description {
 
   position: absolute;
-  bottom: 60px;
-  left: 20px;
+  bottom: 70px;
+  left: 15px;
   z-index: 999;
 }
 </style>

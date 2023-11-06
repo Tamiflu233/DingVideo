@@ -66,6 +66,7 @@ const time = computed(() => {
     .publish-time {
       color: hsla(0,0%,100%,.9);
       font-family: PingFang SC,DFPKingGothicGB-Regular,sans-serif;
+      font-size: .8333333333vw;
       margin-left: 5px;
     }
   }
