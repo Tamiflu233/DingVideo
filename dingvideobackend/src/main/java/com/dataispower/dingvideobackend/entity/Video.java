@@ -67,5 +67,11 @@ public class Video {
     @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = USERID)
     private User user;
+<<<<<<< HEAD
+=======
+ 
+
+
+>>>>>>> cb1cfd5aa6fc275ca8b5bd6555207b9d77e51097
 }
 
