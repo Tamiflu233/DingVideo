@@ -12,7 +12,7 @@ public class RedisLikeKeyUtil {
     public static final String USER_LIKE_KEY = "LIKE_USER::";
     public static final String CANCEL_KEY = "LIKE_CANCEL::";
 
-    public static String getLikedKey(String userId, String postId) {
+    public static String getLikeKey(String userId, String postId) {
         StringBuilder builder = new StringBuilder();
         builder.append(userId);
         builder.append("::");

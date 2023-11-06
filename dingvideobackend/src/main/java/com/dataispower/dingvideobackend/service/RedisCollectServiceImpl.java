@@ -22,7 +22,7 @@ public class RedisCollectServiceImpl implements RedisCollectService {
     @Override
     public void saveCollect(String userId, String postId) {
         String result = "";
-        String key = RedisCollectKeyUtil.USER_COLLECTED_KEY + userId;
+        String key = RedisCollectKeyUtil.USER_COLLECT_KEY + userId;
         String cancel_key = RedisCollectKeyUtil.CANCEL_KEY + userId;
         long object = redisTemplate.opsForSet().add(key, postId);
         boolean flag = redisTemplate.opsForSet().isMember(cancel_key, postId);
@@ -47,26 +47,26 @@ public class RedisCollectServiceImpl implements RedisCollectService {
 
     @Override
     public void increaseCollectCount(String postId) {
-        String key = RedisCollectKeyUtil.POST_COLLECTED_NUM_KEY;
+        String key = RedisCollectKeyUtil.POST_COLLECT_NUM_KEY;
         redisTemplate.opsForHash().increment(key, postId, 1);
     }
 
     @Override
     public void decreaseCollectCount(String postId) {
-        String key = RedisCollectKeyUtil.POST_COLLECTED_NUM_KEY;
+        String key = RedisCollectKeyUtil.POST_COLLECT_NUM_KEY;
         redisTemplate.opsForHash().increment(key, postId, -1);
     }
 
     @Override
     public void setCollectCount(String postId, Long num) {
-        String key = RedisCollectKeyUtil.POST_COLLECTED_NUM_KEY;
+        String key = RedisCollectKeyUtil.POST_COLLECT_NUM_KEY;
         redisTemplate.opsForHash().put(key, postId, num);
     }
 
 
     @Override
     public List<UserCollect> getAllCollect() {
-        Set<String> keys = redisTemplate.keys(RedisCollectKeyUtil.USER_COLLECTED_KEY + "*");
+        Set<String> keys = redisTemplate.keys(RedisCollectKeyUtil.USER_COLLECT_KEY + "*");
         List<UserCollect> userCollects = new ArrayList<>();
         for(String key : keys) {
             Set<String> collectList = redisTemplate.opsForSet().members(key);
@@ -86,7 +86,7 @@ public class RedisCollectServiceImpl implements RedisCollectService {
         Boolean flag1 = false;
         Boolean flag2 = false;
         try {
-            flag1 = redisTemplate.opsForSet().isMember(RedisCollectKeyUtil.USER_COLLECTED_KEY + userId, postId);
+            flag1 = redisTemplate.opsForSet().isMember(RedisCollectKeyUtil.USER_COLLECT_KEY + userId, postId);
             flag2 = !redisTemplate.opsForSet().isMember(RedisCollectKeyUtil.CANCEL_KEY + userId, postId);
         } catch (Exception e) {
             System.out.println(e);
@@ -96,7 +96,7 @@ public class RedisCollectServiceImpl implements RedisCollectService {
 
     @Override
     public List<Map<String, Object>> getCountCollect() {
-        Set<String> keys = redisTemplate.keys(RedisCollectKeyUtil.POST_COLLECTED_NUM_KEY);
+        Set<String> keys = redisTemplate.keys(RedisCollectKeyUtil.POST_COLLECT_NUM_KEY);
         List<Map<String, Object>> res = new ArrayList<>();
         for(String key : keys) {
             Set<String> innerKeys = redisTemplate.opsForHash().keys(key);
@@ -114,7 +114,7 @@ public class RedisCollectServiceImpl implements RedisCollectService {
 
     @Override
     public List<String> getCurrentUserCollectVideos(String userId) {
-        String key = RedisCollectKeyUtil.USER_COLLECTED_KEY + userId;
+        String key = RedisCollectKeyUtil.USER_COLLECT_KEY + userId;
         Set<String> collectedVideos = redisTemplate.opsForSet().members(key);
         List<String> collectedVideosList = new ArrayList<String>(collectedVideos);
         return collectedVideosList;
@@ -134,7 +134,7 @@ public class RedisCollectServiceImpl implements RedisCollectService {
 
     @Override
     public List<Map<String, Object>> getVideosCountCollect(String userId) {
-        String key = RedisCollectKeyUtil.USER_COLLECTED_KEY + userId;
+        String key = RedisCollectKeyUtil.USER_COLLECT_KEY + userId;
         Set<String> videoCollectList = redisTemplate.opsForSet().members(key);
         List<Map<String, Object>> videoCollectCount = new ArrayList<>();
         for(String videoId : videoCollectList) {
@@ -158,7 +158,7 @@ public class RedisCollectServiceImpl implements RedisCollectService {
 
     @Override
     public boolean existCollectCount(String postId) {
-        String key = RedisCollectKeyUtil.POST_COLLECTED_NUM_KEY;
+        String key = RedisCollectKeyUtil.POST_COLLECT_NUM_KEY;
         return redisTemplate.opsForHash().hasKey(key, postId);
     }
 
@@ -171,19 +171,19 @@ public class RedisCollectServiceImpl implements RedisCollectService {
 
     @Override
     public boolean existUserRedisKey(String userId) {
-        String key = RedisCollectKeyUtil.USER_COLLECTED_KEY + userId;
+        String key = RedisCollectKeyUtil.USER_COLLECT_KEY + userId;
         return redisTemplate.hasKey(key);
     }
 
     @Override
     public boolean existPostRedisKey(String postId) {
-        String key = RedisCollectKeyUtil.POST_COLLECTED_NUM_KEY;
+        String key = RedisCollectKeyUtil.POST_COLLECT_NUM_KEY;
         return redisTemplate.opsForHash().hasKey(key, postId);
     }
 
     @Override
     public Long getSingleVideoCountCollect(String videoId) {
-        Long value = ((Integer) redisTemplate.opsForHash().get(RedisCollectKeyUtil.POST_COLLECTED_NUM_KEY,  videoId)).longValue();
+        Long value = ((Integer) redisTemplate.opsForHash().get(RedisCollectKeyUtil.POST_COLLECT_NUM_KEY,  videoId)).longValue();
         return value;
     }
 }

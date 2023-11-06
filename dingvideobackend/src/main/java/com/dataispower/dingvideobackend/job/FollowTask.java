@@ -1,6 +1,7 @@
 package com.dataispower.dingvideobackend.job;
 
 import com.dataispower.dingvideobackend.service.interfaces.FollowService;
+import com.dataispower.dingvideobackend.service.interfaces.RedisFollowService;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -21,7 +22,7 @@ public class FollowTask extends QuartzJobBean {
     @Autowired
     FollowService followService;
     @Autowired
-    RedisFollowService redisFollowedService;
+    RedisFollowService redisFollowService;
 
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
