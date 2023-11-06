@@ -8,8 +8,8 @@
         <ArrowDownBold />
       </el-icon>
     </div>
-    <div class="avatar">
-      <el-avatar :size="70" src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
+    <div class="avatar" @click="toUserCenter">
+      <el-avatar :size="70" :src="videoInfo.user?.avatar"></el-avatar>
     </div>
     <IconButton
    :is-initially-liked="false"
@@ -54,20 +54,34 @@
 </template>
 <script setup lang="ts">
 import { ref,reactive } from 'vue';
+import { VideoDetail } from "@/types/videoInfo";
+import {useRouter} from 'vue-router';
+const router = useRouter();
+//  视频信息
+const props = defineProps({
+  videoInfo: {
+    type: Object as PropType<VideoDetail>,
+    required: true
+  },
+ 
+})
 const videoStates = reactive({
   isLiked: false,
   isCommented: false,
   isCollected: false,
   isShared: false,
-  likeCount: 0,
-  commentCount: 0,
-  collectCount: 0,
+  likeCount: props.videoInfo.likes,
+  commentCount: props.videoInfo.comments,
+  collectCount: props.videoInfo.collections,
   shareCount: 0,
 })
 const emit = defineEmits(['prev', 'next','toggleLike','toggleComment','toggleCollect','toggleShare'])
 /* 切换上一页，下一页 */
 function prevPage() {
   emit('prev');
+}
+function toUserCenter() {
+  router.push({path: `/user/index/${props.videoInfo.user?.id}`})
 }
 function nextPage() {
   emit('next');

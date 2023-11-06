@@ -30,10 +30,6 @@ const menuItems = ref<MenuItem[]>([
     title: "首页",
   },
   {
-    icon: "star",
-    title: "推荐",
-  },
-  {
     icon: "trophy",
     title: "热门",
   },

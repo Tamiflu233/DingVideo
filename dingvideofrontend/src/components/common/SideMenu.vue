@@ -21,6 +21,9 @@
 import { ref } from 'vue'
 import { MenuItem } from "@/types/sidemenu"
 import { useRouter } from "vue-router";
+import { globalStore } from "@/store/global/global";
+// 全局状态管理
+const store = globalStore();
 // 路由控制
 const router = useRouter();
 // 应用图标链接：
@@ -33,11 +36,10 @@ defineProps({
   }
 })
 // 当前选择的分类按钮项的索引
-const selected = ref(0)
+const selected = ref(store.sideBarIndex)
 // 分类索引表
 let cateMap:string[] = [
   'home',
-  'recommend',
   'hot',
   'sports',
   'knowledge',
@@ -51,6 +53,7 @@ let cateMap:string[] = [
 // 获取当前点击的按钮索引
 function selectItem(index: number) {
   selected.value = index
+  store.setSideBarIndex(index)
   if(index === 0) {
     // 跳转到首页
     router.push({path: '/'})

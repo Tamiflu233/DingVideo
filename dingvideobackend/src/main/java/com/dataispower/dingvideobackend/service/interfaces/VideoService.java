@@ -12,4 +12,7 @@ import java.util.List;
 
 public interface VideoService {
     List<Video> getVideoList(String kind);
+    List<Video> getHomeVideos();
+
+    List<Video> getVideoListByUserIdAndType(Integer userid, Integer type);
 }

@@ -8,6 +8,9 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import java.util.Date;
 
+
+import static com.dataispower.dingvideobackend.common.TableColumns.COMMON.CREATE_TIME;
+import static com.dataispower.dingvideobackend.common.TableColumns.COMMON.UPDATE_TIME;
 import static com.dataispower.dingvideobackend.common.TableColumns.VIDEO.*;
 
 

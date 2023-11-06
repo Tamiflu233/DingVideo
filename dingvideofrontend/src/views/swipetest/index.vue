@@ -3,13 +3,17 @@
    <!-- <VideoCardRight
     :detail="detail"
    ></VideoCardRight> -->
-   <LoginAvatar>
+   <VideoDescription
+    nickname="233"
+    publish-time="2023-11-04 16:20:26.263000"
+    title="测试标题aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+   >
     
-   </LoginAvatar>
+   </VideoDescription>
   </div>
 </template>
 <script setup lang="ts">
-const LoginAvatar = defineAsyncComponent(() => import("@/components/common/LoginAvatar.vue"))
+const VideoDescription = defineAsyncComponent(() => import("@/components/common/VideoDescription.vue"))
 // function toggleLike(payload:Boolean) {
 //   let diff:number = payload ? 1 : -1;
 //   count.value = count.value + diff;
