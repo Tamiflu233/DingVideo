@@ -44,7 +44,7 @@ const props = defineProps({
   }
 })
 const currentIcon = ref(props.iconSrc);  
-const emit = defineEmits(['like'])
+const emit = defineEmits(['like','judgeLogin'])
 
 const isLiked = ref(props.isInitiallyLiked);
 const isAnimating = ref(false);
@@ -57,7 +57,7 @@ const toggleLike = () => {
   } else {
     currentIcon.value = props.iconSrc
   }
-
+  emit('judgeLogin');
   // Remove the animation class after it completes
   setTimeout(() => {
     isAnimating.value = false;
