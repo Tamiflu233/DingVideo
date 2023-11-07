@@ -364,6 +364,10 @@ let handleKeydown:any;
 function notLoginIn(payload:Boolean) {
   if(!payload) {
     router.push("/login")
+    ElMessage({
+      message: '请先登录',
+      type: 'warning'
+    });
   }
 }
 
