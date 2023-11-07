@@ -1,6 +1,6 @@
 <template>
     <div class="login-wrapper" style="height:100vh; display: flex; align-items: center; justify-content: center; background-color: #76d7ea">
-        <div style="display: flex; background-color: white; width: 60%; border-radius: 5px; overflow: hidden">
+        <div style="display: flex; background-color: white; width: 50%; border-radius: 5px; overflow: hidden">
             <div @click.prevent style="flex: 1; display: flex; align-items: center; justify-content: center;">
                 <img src="@/assets/img/login.png" alt="" style="width: 90%; height: 90%;">
             </div>
@@ -22,13 +22,13 @@
                         </div>
                     </el-form-item>
                     <el-form-item>
-                        <el-button type="primary" style="width: 100%; background-color: #76d7ea" @click="login">登 录</el-button>
+                        <el-button type="primary" style="width: 100%; height: 35px; background-color: #76d7ea" @click="login">登 录</el-button>
                     </el-form-item>
                     <div style="display: flex">
-                        <div style="flex: 1; font-size: 10px; text-align: left;">
+                        <div style="flex: 1; font-size: 15px; text-align: left;">
                             还没有账号？请<span style="color: #76d7ea; cursor: pointer" @click="register">注册</span>
                         </div>
-                        <div style="flex: 1; text-align: right; font-size: 10px;">
+                        <div style="flex: 1; text-align: right; font-size: 15px;">
                             <span style="color: #76d7ea; cursor: pointer">忘记密码？</span>
                         </div>
                     </div>
@@ -144,10 +144,13 @@ const user = reactive({
   position: absolute;
 }
 .el-input__inner::placeholder {
-    font-size: 10px;
+    font-size: 15px;
+}
+.el-input__wrapper {
+    height: 40px;
 }
 .code {
     width: 100%;
-    height: 32px;
+    height: 42px;
 }
 </style>
