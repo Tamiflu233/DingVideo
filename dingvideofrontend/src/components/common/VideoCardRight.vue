@@ -7,7 +7,7 @@
           <el-avatar :size="70" :src="videoInfo.user?.avatar" size="large"></el-avatar>
         </a>
         <!--                        <div class="username">{{ }}</div>-->
-        <div class="username">{{ videoInfo.user.username }}</div>
+        <div class="username">{{ videoInfo.user?.nickname }}</div>
         <!--                        <button @click="cancelFocusOn(detail.user.id)" class="focusOn" v-if="checkFollow(detail.user.id)">已关注-->
         <button class="focusOn"  v-if="isfocused" @click="doFocus">已关注
         </button>
