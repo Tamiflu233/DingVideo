@@ -55,22 +55,25 @@ const isLiked = ref(props.isInitiallyLiked);
 const isAnimating = ref(false);
 
 const toggleLike = () => {
-  isLiked.value = !isLiked.value;
-  isAnimating.value = true;
-  if (currentIcon.value === props.iconSrc) {
-    currentIcon.value = props.iconTgt
-  } else {
-    currentIcon.value = props.iconSrc
+  
+  if(store.existToken()) {
+    isLiked.value = !isLiked.value;
+    isAnimating.value = true;
+    if (currentIcon.value === props.iconSrc) {
+      currentIcon.value = props.iconTgt
+    } else {
+      currentIcon.value = props.iconSrc
+    }
+     // Remove the animation class after it completes
+    setTimeout(() => {
+      isAnimating.value = false;
+      // Emit an event for parent component if needed
+      emit('like', isLiked.value);
+    }, 600); // the timeout should match your CSS animation duration
   }
-
   emit('judgeLogin', store.existToken());
 
-  // Remove the animation class after it completes
-  setTimeout(() => {
-    isAnimating.value = false;
-    // Emit an event for parent component if needed
-    emit('like', isLiked.value);
-  }, 600); // the timeout should match your CSS animation duration
+ 
 };
 
 
