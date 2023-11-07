@@ -5,15 +5,11 @@ git clone git@github.com:Tamiflu233/DingVideo.git
 ```
 接着通过编译器打开项目，本项目前端采用VSCode编译器进行开发，后端基于IntelliJ IDEA环境进行开发。
 用VSCode打开dingvideofrontend文件，这里默认nodejs、vue3和npnm已经安装完成。在TERMINAL黑框中输入以下代码：
+```shell
 # 安装项目前端所需要的工具包
-```shell
 pnpm install
-```
-
 # 运行前端代码
-```shell
-pnpm run dev 
-
+pnpm run dev
 ```
 
 如果终端没有报错，在浏览器中输入 http://localhost:9527/ 地址即可访问项目的前端。
