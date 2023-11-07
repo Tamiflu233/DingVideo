@@ -63,6 +63,7 @@ function login() {
 :deep(.el-input__inner) {
   &::placeholder {
     font-size: 14px;
+    line-height: 35px;
   }
 }
 
