@@ -56,6 +56,9 @@ import { getUserInfoById } from "@/api/login.js";
 import {watch,onMounted, ref} from "vue";
 import {useRoute} from "vue-router";
 import {getVideoByUserIdAndType} from "@/api/video";
+import { videoStore } from "@/store/videos/videos";
+// 视频缓存池
+const store = videoStore();
 const VideoInfoCard = defineAsyncComponent(() => import("@/components/common/VideoInfoCard.vue"))
 let userInfo = reactive({
   username:"",
@@ -108,6 +111,7 @@ const arrHeight = ref([])
 const getUserPost = async () => {
   let res = await getVideoByUserIdAndType({userid: parseInt(route.params.id as string), type: 1})
   userPost.value = res.data.videoInfo
+  store.setVideosBuffer(userPost.value);
   console.log(`我的作品,${userPost.value.length}`);
   
 }
