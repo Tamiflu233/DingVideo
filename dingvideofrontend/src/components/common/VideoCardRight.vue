@@ -112,9 +112,12 @@
 <!--      </div>-->
       <el-input
           v-model="content" class="comment-input my" type="text" placeholder="说点什么吧..." ref="commentInput"
-          :prefix-icon="Edit" @keyup.enter="sendComment(videoInfo, to)" clearable style="margin-top: 5px"
-          :disabled="review"
-      />
+          style="margin-top: 5px" @input="handleInput" @keyup.enter="sendMessage"
+      >
+        <template #append>
+          <el-button @click="sendMessage" style="background-color: #06b0fb; color: #ffffff">发送</el-button>
+        </template>
+      </el-input>
     </div>
   </div>
 </template>
@@ -123,6 +126,7 @@
 import { onMounted, onUnmounted,ref } from 'vue'
 import { VideoDetail } from "@/types/videoInfo";
 import timeUtil from '@/utils/date';
+const content = ref('')
 /* 日期显示 */
 const publishTime = computed(() => {
   return timeUtil(props.videoInfo.createTime)
@@ -130,6 +134,16 @@ const publishTime = computed(() => {
 const isfocused = ref(false)
 function doFocus() {
   isfocused.value = !isfocused.value
+}
+let showEmoji = false;
+function handleInput() {
+  showEmoji = content?.value.length > 0;
+}
+function toggleEmojiMenu() {
+  // 处理显示/隐藏表情选项菜单的逻辑
+}
+function sendMessage() {
+  // 处理发送消息的逻辑
 }
 const props = defineProps({
   review: {
