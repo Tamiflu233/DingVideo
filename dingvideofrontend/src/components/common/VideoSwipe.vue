@@ -284,15 +284,7 @@ function onChange(index: number) {
 function onDragStart(args:{index: number}) {
 
   startIndex = args.index;
-  if(args.index === 2) {
 
-  }
-  if(args.index === 0) {
-
-  }
-  
-  
-  
 }
 /* 结束拖拽轮播item */
 function onDragEnd(args:{index: number}) {
@@ -340,22 +332,7 @@ function onDragEnd(args:{index: number}) {
       }
     }
   }
-
-    /* 
-      临时修改视频封面
-    
-    */
-  if(args.index === 0) {
-    oldcover = myPlayer3.value.poster();
-
-  } else if(args.index === 2) {
-    oldcover = myPlayer1.value.poster();
-    
-    
-  }
-
-
-  
+ 
 }
 let handleWheel:any;
 let handleKeydown:any;
@@ -489,9 +466,7 @@ onMounted(() => {
     if (event.deltaY < 0) {
       // 向上滚动
       prevPage();
-      
-
-      
+       
     } else {
       // 向下滚动
       nextPage();
