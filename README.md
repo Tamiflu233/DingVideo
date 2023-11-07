@@ -5,7 +5,7 @@
 git clone git@github.com:Tamiflu233/DingVideo.git
 ```
 接着通过编译器打开项目，本项目前端采用VSCode编译器进行开发，后端基于IntelliJ IDEA环境进行开发。
-
+> 🚩请务必先运行项目后端再运行前端
 ## 2. 后端运行
 打开IntelliJ IDEA，导入项目后端文件```dingvideobackend```，这里默认IDEA中java1.8和maven已经配置完毕。如果pom.xml文件中有报错，说明后端环境所需要的部分依赖未导入，等待maven自动把依赖导入即可。
 
