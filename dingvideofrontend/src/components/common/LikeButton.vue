@@ -19,6 +19,7 @@
 <script lang="ts" setup>
 import 'iconify-icon';
 import { ref } from 'vue';
+import { loginStore } from '@/store/login/login.ts'
 
 
 const props = defineProps({
@@ -44,7 +45,9 @@ const props = defineProps({
   }
 })
 const currentIcon = ref(props.iconSrc);  
-const emit = defineEmits(['like'])
+// 登录状态
+const store = loginStore()
+const emit = defineEmits(['like', 'judgeLogin'])
 
 const isLiked = ref(props.isInitiallyLiked);
 const isAnimating = ref(false);
@@ -57,7 +60,7 @@ const toggleLike = () => {
   } else {
     currentIcon.value = props.iconSrc
   }
-
+  emit('judgeLogin', store.existToken());
   // Remove the animation class after it completes
   setTimeout(() => {
     isAnimating.value = false;

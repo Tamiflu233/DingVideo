@@ -3,7 +3,7 @@
       <van-swipe-item>
         <!-- <div class="video-wrapper"> -->
           <video ref="videoPlayer1" @play="video1Play" @pause="video1Pause" class="video-js" style="margin: auto auto" ></video>
-          <VideoToolBar :videoInfo="video1Info" @prev="prev" @next="next" @toggle-comment="onShowComment" class="tool-bar"></VideoToolBar>
+          <VideoToolBar :videoInfo="video1Info" @judgeLogin="notLoginIn" @prev="prev" @next="next" @toggle-comment="onShowComment" class="tool-bar"></VideoToolBar>
           <div class="show-comment-btn" v-if="!isShowComment" @click="onShowComment">
             <el-icon class="show-comment-icon" >
               <ArrowLeftBold />
@@ -25,7 +25,7 @@
       </van-swipe-item>
       <van-swipe-item>
         <video ref="videoPlayer2" @play="video2Play" @pause="video2Pause" class="video-js" style="margin: auto auto"></video>\
-        <VideoToolBar :videoInfo="video2Info" @prev="prev" @next="next" @toggle-comment="onShowComment" class="tool-bar"></VideoToolBar>
+        <VideoToolBar :videoInfo="video2Info" @judgeLogin="notLoginIn" @prev="prev" @next="next" @toggle-comment="onShowComment" class="tool-bar"></VideoToolBar>
         <div class="show-comment-btn" v-if="!isShowComment" @click="onShowComment">
           <el-icon class="show-comment-icon">
             <ArrowLeftBold />
@@ -46,7 +46,7 @@
       </van-swipe-item>
       <van-swipe-item>
         <video ref="videoPlayer3" @play="video3Play" @pause="video3Pause" class="video-js" style="margin: auto auto"></video>
-        <VideoToolBar :videoInfo="video3Info" @prev="prev" @next="next" @toggle-comment="onShowComment" class="tool-bar"></VideoToolBar>
+        <VideoToolBar :videoInfo="video3Info" @judgeLogin="notLoginIn" @prev="prev" @next="next" @toggle-comment="onShowComment" class="tool-bar"></VideoToolBar>
         <div class="show-comment-btn" v-if="!isShowComment" @click="onShowComment">
             <el-icon class="show-comment-icon">
               <ArrowLeftBold />
@@ -71,6 +71,7 @@
 <script setup lang="ts">
 import { watchEffect,watch, onMounted, onUnmounted,ref } from 'vue'
 import { VideoDetail } from "@/types/videoInfo"
+import { useRouter } from 'vue-router';
 import videojs from "video.js"
 import Player from 'video.js/dist/types/player'
 import "video.js/dist/video-js.css"
@@ -78,6 +79,8 @@ const VideoToolBar = defineAsyncComponent(() => import("@/components/common/Vide
 const VideoCardRight = defineAsyncComponent(() => import("@/components/common/VideoCardRight.vue"))
 const VideoDescription = defineAsyncComponent(() => import("@/components/common/VideoDescription.vue"))
 
+// 路由跳转
+const router = useRouter();
 // 是否显示评论框
 const isShowComment = ref(false)
 function onShowComment() {
@@ -356,6 +359,13 @@ function onDragEnd(args:{index: number}) {
 }
 let handleWheel:any;
 let handleKeydown:any;
+
+/* 没有登录跳转到登录界面 */
+function notLoginIn(payload:Boolean) {
+  if(!payload) {
+    router.push("/login")
+  }
+}
 
 /* 滚轮下/按键下切换下一页 */
 function nextPage() {

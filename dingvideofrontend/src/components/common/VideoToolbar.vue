@@ -18,6 +18,7 @@
     colorSrc="white"
     color-tgt="#FE2C55"
     :count="videoStates.likeCount"
+    @judgeLogin="judgeLogin"
     @like="toggleLike"
    ></IconButton>
    <IconButton
@@ -36,6 +37,7 @@
     colorSrc="white"
     color-tgt="#FFB802"
     :count="videoStates.collectCount"
+    @judgeLogin="judgeLogin"
     @like="toggleCollect"
    ></IconButton>
    <IconButton
@@ -45,6 +47,7 @@
     colorSrc="white"
     color-tgt="white"
     :count="videoStates.shareCount"
+    @judgeLogin="judgeLogin"
     @like="toggleShare"
    ></IconButton>
    <el-icon class="more">
@@ -55,7 +58,13 @@
 <script setup lang="ts">
 import { ref,reactive } from 'vue';
 import { VideoDetail } from "@/types/videoInfo";
-import {useRouter} from 'vue-router';
+import { useRouter } from 'vue-router';
+import { loginStore } from '@/store/login/login.ts'
+import { ro } from 'element-plus/es/locale/index.mjs';
+
+
+// 登录状态管理
+const store = loginStore()
 const router = useRouter();
 //  视频信息
 const props = defineProps({
@@ -75,7 +84,7 @@ const videoStates = reactive({
   collectCount: props.videoInfo.collections,
   shareCount: 0,
 })
-const emit = defineEmits(['prev', 'next','toggleLike','toggleComment','toggleCollect','toggleShare'])
+const emit = defineEmits(['prev', 'next','toggleLike','toggleComment','toggleCollect','toggleShare', 'judgeLogin'])
 /* 切换上一页，下一页 */
 function prevPage() {
   emit('prev');
@@ -87,7 +96,19 @@ function nextPage() {
   emit('next');
 }
 const IconButton = defineAsyncComponent(() => import("@/components/common/IconButton.vue"))
+
+function judgeLogin(payload:Boolean) {
+  emit('judgeLogin', payload)
+}
+
 function toggleLike(payload:Boolean) {
+  // if(store.existToken()) {
+  //   let diff:number = payload ? 1 : -1;
+  //   videoStates.likeCount = videoStates.likeCount + diff;
+  //   emit('toggleLike', payload);
+  // } else {
+  //   router.push("/login")
+  // }
   let diff:number = payload ? 1 : -1;
   videoStates.likeCount = videoStates.likeCount + diff;
   emit('toggleLike', payload);
