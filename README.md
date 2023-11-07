@@ -1,7 +1,7 @@
 # DingVideo使用说明
 首先将项目从github的main分支上拉取下来：
 ```shell
-git clone git@github.com:Tamiflu233/RandomLearning.git
+git clone git@github.com:Tamiflu233/DingVideo.git
 ```
 接着通过编译器打开项目，本项目前端采用VSCode编译器进行开发，后端基于IntelliJ IDEA环境进行开发。
 用VSCode打开dingvideofrontend文件，这里默认nodejs、vue3和npnm已经安装完成。在TERMINAL黑框中输入以下代码：
