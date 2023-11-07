@@ -419,6 +419,10 @@ onMounted(() => {
     controls: true,
     controlBar: {
       //音量条竖直
+      currentTimeDisplay: true, // 当前时间
+      timeDivider: true, // 时间分割线
+      durationDisplay: true, // 总时间
+      remainingTimeDisplay: false,
       volumePanel: {
           inline: false,
           CurrentTimeDisplay: true
@@ -436,6 +440,10 @@ onMounted(() => {
     // autoplay: true,
     controls: true,
     controlBar: {
+      currentTimeDisplay: true, // 当前时间
+      timeDivider: true, // 时间分割线
+      durationDisplay: true, // 总时间
+      remainingTimeDisplay: false,
       //音量条竖直
       volumePanel: {
           inline: false,
@@ -454,6 +462,10 @@ onMounted(() => {
     // autoplay: true,
     controls: true,
     controlBar: {
+      currentTimeDisplay: true, // 当前时间
+      timeDivider: true, // 时间分割线
+      durationDisplay: true, // 总时间
+      remainingTimeDisplay: false,
       //音量条竖直
       volumePanel: {
           inline: false,
