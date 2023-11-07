@@ -22,6 +22,6 @@ pnpm run dev
 
 点击进入src/test/java/com/dataispower/dingvideobackend/DingvideobackendApplicationTests.java文件，选中如下运行按钮：
 
-![图片](https://internal-api-drive-stream.feishu.cn/space/api/box/stream/download/v2/cover/QRt3bYoAFoL6nuxCuQfcWVB7ndh/?fallback_source=1&height=1280&mount_node_token=B3BadUyBvott1UxqvUgclO7xnAc&mount_point=docx_image&policy=equal&width=1280)
+![图片]([https://internal-api-drive-stream.feishu.cn/space/api/box/stream/download/v2/cover/QRt3bYoAFoL6nuxCuQfcWVB7ndh/?fallback_source=1&height=1280&mount_node_token=B3BadUyBvott1UxqvUgclO7xnAc&mount_point=docx_image&policy=equal&width=1280](http://s32s1qs47.bkt.clouddn.com/img/project_snapshot.PNG)
 
 控制台没有报错或停止，则项目后端程序成功运行，这时候进入 http://localhost:9527/ 地址即可以体验本项目。
