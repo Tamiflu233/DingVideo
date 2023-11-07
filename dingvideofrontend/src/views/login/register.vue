@@ -1,6 +1,6 @@
 <template>
     <div class="login-wrapper" style="height:100vh; display: flex; align-items: center; justify-content: center; background-color: #76d7ea">
-        <div style="display: flex; background-color: white; width: 60%; border-radius: 5px; overflow: hidden">
+        <div style="display: flex; background-color: white; width: 50%; border-radius: 5px; overflow: hidden">
             <div @click.prevent style="flex: 1; display: flex; align-items: center; justify-content: center;">
                 <img src="@/assets/img/register.png" alt="" style="width: 90%; height: 90%;">
             </div>
@@ -22,18 +22,20 @@
                     <el-form-item label=" " prop="phone">
                         <el-input size="medium" placeholder="请输入手机号" v-model="user.phone" :prefix-icon="Iphone"></el-input>
                     </el-form-item>
-                    <el-form-item label=" ">
+                    <el-form-item>
                     <!-- <el-form-item label=" " prop="sidentifyMode" :rules="[{ required: false, message: '请输入验证码！', trigger: 'blur'}]"> -->
-                        <div style="display: flex; margin-bottom: 10px;">
+                        <div style="display: flex; margin-bottom: 8px; padding-left: 20.67px">
                             <el-input size="medium" style="flex: 1" placeholder="请输入验证码" v-model="sidentifyMode" clearable :prefix-icon="CircleCheck"></el-input>
                             <div style="flex: 1;" class="code" @click="refreshCode">
                             <ValidCode :identifyCode="identifyCode"></ValidCode>
                             </div>
                         </div>
                     </el-form-item>
-                    <el-form-item>
-                        <el-button type="primary" style="width: 100%; background-color: #76d7ea" @click="register">注 册</el-button>
-                    </el-form-item>
+                    <div style="padding-left: 20.67px">
+                        <el-form-item>
+                            <el-button type="primary" style="width: 100%; height: 35px; background-color: #76d7ea" @click="register">注 册</el-button>
+                        </el-form-item>
+                    </div>
                 </el-form>
             </div>
         </div>
@@ -184,13 +186,16 @@ const rules = reactive<FormRules<RegisterForm>>({
   position: absolute;
 }
 .el-input__inner::placeholder {
-    font-size: 10px;
+    font-size: 15px;
 }
 .code {
     width: 100%;
-    height: 32px;
+    height: 42px;
 }
 .el-form-item__error {
     font-size: 10px;
+}
+.el-input__wrapper {
+    height: 40px;
 }
 </style>

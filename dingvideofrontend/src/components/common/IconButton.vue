@@ -6,6 +6,7 @@
     :icon-tgt="iconTgt"
     :color-src="colorSrc"
     :color-tgt="colorTgt"
+    @judgeLogin="judgeLogin"
     @like="toggleLike"
    ></LikeButton>
    <div class="bottom-number">
@@ -43,7 +44,12 @@ const props = defineProps({
     type: [Number, Object],
   },
 })
-const emit = defineEmits(['like'])
+const emit = defineEmits(['like', 'judgeLogin'])
+
+function judgeLogin(payload:Boolean) {
+  emit('judgeLogin', payload)
+}
+
 function toggleLike(payload:Boolean) {
     emit('like', payload);
 }
