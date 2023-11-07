@@ -3,9 +3,11 @@ package com.dataispower.dingvideobackend.controller;
 import com.dataispower.dingvideobackend.config.AuthenticationConfigConstants;
 import com.dataispower.dingvideobackend.dto.ResponseResult;
 import com.dataispower.dingvideobackend.service.interfaces.CollectService;
-import com.dataispower.dingvideobackend.service.interfaces.VideoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.Map;
@@ -20,8 +22,6 @@ import java.util.Map;
 public class CollectController {
     @Autowired
     private CollectService collectService;
-    @Autowired
-    private VideoService videoService;
 
     /**
      * 记录用户对视频收藏
@@ -33,8 +33,6 @@ public class CollectController {
     public ResponseResult collectVideo(@PathVariable String userId, @PathVariable String videoId) {
         try {
             collectService.collect(userId,videoId);
-            // 查询该条视频的作者用户
-            Map<String, Object> videoInfo = (Map<String, Object>) videoService.getVideoByVideoId(videoId, userId).get("user");
             return ResponseResult.success(userId + "对视频"+videoId+"收藏成功！");
         } catch (Exception e) {
             e.printStackTrace();
