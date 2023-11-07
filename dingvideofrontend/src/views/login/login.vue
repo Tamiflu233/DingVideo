@@ -145,6 +145,7 @@ const user = reactive({
 }
 .el-input__inner::placeholder {
     font-size: 15px;
+    line-height: 35px;
 }
 .el-input__wrapper {
     height: 40px;
