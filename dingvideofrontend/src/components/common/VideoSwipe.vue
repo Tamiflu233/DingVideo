@@ -428,10 +428,6 @@ onMounted(() => {
     // autoplay: true,
     controls: true,
     controlBar: {
-      // currentTimeDisplay: true, // 当前时间
-      // timeDivider: true, // 时间分割线
-      // durationDisplay: true, // 总时间
-      // remainingTimeDisplay: false,
       //音量条竖直
       volumePanel: {
           inline: false,
@@ -439,7 +435,7 @@ onMounted(() => {
         }
         // // 暂停按钮隐藏
     },
-    playbackRates: [0.5, 1, 1.5, 2]
+    playbackRates: [0.5, 0.75, 1, 1.5, 2]
   }, () => {
     // myPlayer.value.poster("https://rl.shuishan.net.cn/ef3005a0bc2f71ed90a40764a0fd0102/snapshots/358d95a124ff421382624687fe348c0c-00001.jpg")
     videoSet(videoQueue.current,1)
@@ -450,10 +446,6 @@ onMounted(() => {
     // autoplay: true,
     controls: true,
     controlBar: {
-      // currentTimeDisplay: true, // 当前时间
-      // timeDivider: true, // 时间分割线
-      // durationDisplay: true, // 总时间
-      // remainingTimeDisplay: false,
       //音量条竖直
       volumePanel: {
           inline: false,
@@ -461,7 +453,7 @@ onMounted(() => {
         }
         // // 暂停按钮隐藏
     },
-    playbackRates: [0.5, 1, 1.5, 2]
+    playbackRates: [0.5, 0.75, 1, 1.5, 2]
   }, () => {
     // myPlayer.value.poster("https://rl.shuishan.net.cn/ef3005a0bc2f71ed90a40764a0fd0102/snapshots/358d95a124ff421382624687fe348c0c-00001.jpg")
     videoSet((videoQueue.current+1 + videoQueue.queue.length) % videoQueue.queue.length,2)
@@ -472,10 +464,6 @@ onMounted(() => {
     // autoplay: true,
     controls: true,
     controlBar: {
-      // currentTimeDisplay: true, // 当前时间
-      // timeDivider: true, // 时间分割线
-      // durationDisplay: true, // 总时间
-      // remainingTimeDisplay: false,
       //音量条竖直
       volumePanel: {
           inline: false,
@@ -483,7 +471,7 @@ onMounted(() => {
         }
         // // 暂停按钮隐藏
     },
-    playbackRates: [0.5, 1, 1.5, 2]
+    playbackRates: [0.5, 0.75, 1, 1.5, 2]
   }, () => {
     // myPlayer.value.poster("https://rl.shuishan.net.cn/ef3005a0bc2f71ed90a40764a0fd0102/snapshots/358d95a124ff421382624687fe348c0c-00001.jpg")
     videoSet((videoQueue.current+2 + videoQueue.queue.length) % videoQueue.queue.length,3)
@@ -653,6 +641,15 @@ onUnmounted(() => {
       .vjs-volume-vertical {
         border-radius: 12px 12px 0 0;
       }
+      //.vjs-time-control {
+      //  display: block;
+      //}
+      //.vjs-current-time {
+      //  display: block;
+      //}
+      //.vjs-remaining-time {
+      //  display: none;
+      //}
     }
   }
 

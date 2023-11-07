@@ -7,7 +7,7 @@
           <el-avatar :size="70" :src="videoInfo.user?.avatar" size="large"></el-avatar>
         </a>
         <!--                        <div class="username">{{ }}</div>-->
-        <div class="username">{{ videoInfo.user.username }}</div>
+        <div class="username">{{ videoInfo.user.nickname }}</div>
         <!--                        <button @click="cancelFocusOn(detail.user.id)" class="focusOn" v-if="checkFollow(detail.user.id)">已关注-->
         <button class="focusOn"  v-if="isfocused" @click="doFocus">已关注
         </button>
@@ -111,6 +111,7 @@
 <!--        </el-row>-->
 <!--      </div>-->
       <el-input
+          v-model="content" class="comment-input my" type="text" placeholder="说点什么吧..." ref="commentInput" :prefix-icon="Edit" style="margin-top: 5px"/>
           v-model="content" class="comment-input my" type="text" placeholder="说点什么吧..." ref="commentInput"
           :prefix-icon="Edit" @keyup.enter="sendComment(videoInfo, to)" clearable style="margin-top: 5px"
           :disabled="review"
