@@ -3,6 +3,7 @@ package com.dataispower.dingvideobackend.service.interfaces;
 import com.dataispower.dingvideobackend.entity.Video;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * author:heroding
@@ -15,4 +16,6 @@ public interface VideoService {
     List<Video> getHomeVideos();
 
     List<Video> getVideoListByUserIdAndType(Integer userid, Integer type);
+
+    Map<String, Object> getVideoByVideoId(String videoId, String username);
 }
