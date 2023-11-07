@@ -161,6 +161,10 @@ onMounted(async () => {
   bottom: 0;
   left: 0;
   right: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: flex-start;
 }
 .userInfo {
   width: 60%;
@@ -179,8 +183,7 @@ onMounted(async () => {
   margin-top: 20px;
   /* margin-left: 650px; */
   margin: 0 auto;
-  position: relative;
-  left: -10%;
+ 
   
   
 }
@@ -192,8 +195,7 @@ onMounted(async () => {
   margin: 0 auto;
   margin-top: 20px;
   margin-bottom: 30px;
-  position: relative;
-  left: -17%;
+  
 }
 
 .tagArea {
