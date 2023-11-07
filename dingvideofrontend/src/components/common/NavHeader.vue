@@ -13,7 +13,7 @@
     </el-input>
     </div>
     <div class="login-btn">
-      <el-button style="border-radius: 195px;height: 35px;" v-if="store.token == null" color="#87b8e8" type="login" :icon="User" @click="login">
+      <el-button style="border-radius: 195px;height: 35px;" v-if="store.token == null" color="#06B0FB" type="login" :icon="User" @click="login">
         登录
       </el-button>
       <LoginAvatar v-else >
@@ -48,7 +48,8 @@ function login() {
   .search-input {
     height: 35px;
     border-radius: 25px;
-    background-color: #d4e4f8;
+    box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 0.06);
+    // background-color: #d4e4f8;
     margin-right: 20px;
     .input-with-select .el-input-group__prepend {
       background-color: var(--el-fill-color-blank);
@@ -62,6 +63,7 @@ function login() {
 :deep(.el-input__inner) {
   &::placeholder {
     font-size: 14px;
+    line-height: 35px;
   }
 }
 
@@ -74,8 +76,9 @@ function login() {
 
 :deep(.el-input-group__append) {
   height: 35px;
-  background: #87b8e8;
-  border-radius: 25px;
+  // background: #87b8e8;
+  background: #06b0fb;
+  border-radius: 0 25px 25px 0;
   border: 0;
   box-shadow: 0 0 0 0px;
 }

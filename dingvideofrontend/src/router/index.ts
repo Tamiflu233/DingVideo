@@ -46,24 +46,6 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
 
-    path: '/test',
-    name: 'test',
-    component: () => import('@/views/videotest/index.vue'),
-    meta: {
-      title: '视频测试',
-    },
-  },
-  {
-
-    path: '/swipe',
-    name: 'swipe',
-    component: () => import('@/views/swipetest/index.vue'),
-    meta: {
-      title: '轮播测试',
-    },
-  },
-  {
-
     path: '/detail/:kind/:index',
     name: 'detail',
     component: () => import('@/views/detail/VideoDetail.vue'),

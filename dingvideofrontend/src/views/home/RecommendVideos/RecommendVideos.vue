@@ -239,12 +239,7 @@ const getCurrentVideos = async () => {
 	
   store.setVideosBuffer(videoList);
 }
-// watch(route, async (newRoute, oldRoute) => {
-// 	console.log(":asdasd");
-	
-//   // 在这里执行你需要的操作
-//   await getCurrentVideos()
-// })
+
 const stopWatch = watchEffect(async () => {
 	console.log(`路由${route.name}`);
 	

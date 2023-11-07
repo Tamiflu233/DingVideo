@@ -190,7 +190,6 @@ const rules = reactive<FormRules<RegisterForm>>({
 }
 .code {
     width: 100%;
-    height: 42px;
 }
 .el-form-item__error {
     font-size: 10px;

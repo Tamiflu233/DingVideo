@@ -23,15 +23,6 @@ let category:string = "";
 category = route.query.kind as string;
 console.log(category);
 
-// let videoInfo = reactive(
-//   {
-//   src:"https://rl.shuishan.net.cn/a6b598106d8971eebfff4531858c0102/736edc0145b94189b2f5b44666cee183-fd719751718abcfad6f25c5f32b6fd63-ld.mp4",
-//   poster: "https://rl.shuishan.net.cn/a6b598106d8971eebfff4531858c0102/snapshots/e9c559d852fb4bab85ae9e6f2f39a5e8-00005.jpg",
-//   title: "Count Sketch改进",
-//   author:"MGao",
-//   publishTime:"11月1日"
-// }
-// )
 /* 视频信息列表 */
 const videoList = reactive([
 
@@ -50,11 +41,7 @@ watch(
   },
   { immediate: true }
 );
-// onMounted(async () => {
-//   console.log("原神，启动！");
-  
-//   await getCurrentKindVideos(category as string)
-// })
+
 
 </script>
 
@@ -64,11 +51,7 @@ watch(
   width: 100%;
   height: 100%;
   .show-empty {
-    // position: absolute;
-    // top: 0;
-    // bottom: 0;
-    // left: 0;
-    // right: 0;
+
     position: relative;
     top: 50%;
     transform: translateY(-70%);
