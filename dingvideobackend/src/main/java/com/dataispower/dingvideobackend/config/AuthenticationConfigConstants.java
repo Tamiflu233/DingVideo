@@ -14,7 +14,11 @@ public class AuthenticationConfigConstants {
 
     public static final String HEADER_STRING = "Authorization";
 
-    public static final String POST_URL = "/api/vod";
+    public static final String LIKE_API = "/api/like";
+
+    public static final String COLLECT_API = "/api/collect";
+
+    public static final String FOLLOW_API = "/api/follow";
 
     public static final String USER_API = "/api/user";
 

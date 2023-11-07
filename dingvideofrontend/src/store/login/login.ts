@@ -19,6 +19,9 @@ export const loginStore = defineStore("login", {
     clearToken() {
       this.token = null;
     },
+    existToken() {
+      return this.token !== null;
+    }
   },
   persist: {
     enabled: true,
