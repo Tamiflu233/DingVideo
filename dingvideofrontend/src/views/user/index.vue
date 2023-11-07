@@ -115,17 +115,17 @@ const getUserPost = async () => {
 const Toggle = async () => {
   const userid:number = route.params.id
   const types = radio.value
-  if (radio.value === '作品' && userPost.value.length === 0) {
+  if (radio.value === '作品' && userPost?.length === 0) {
     let type = 1
     const post = await getVideoByUserIdAndType({userid, type})
     userPost.value = post.info
     // waterFallInit(columns, card_columns_posts, arrHeight, userPost)
-  } else if (radio.value === '收藏' && userCollect.value.length === 0) {
+  } else if (radio.value === '收藏' && userCollect?.length === 0) {
     let type = 2
     const post = await getVideoByUserIdAndType({userid, type})
     userCollect.value = post.info
     // waterFallInit(columns, card_columns_collect, arrHeight, userCollect)
-  } else if (radio.value === '点赞' && userLike.value.length === 0) {
+  } else if (radio.value === '点赞' && userLike?.length === 0) {
     let type = 3
     const post = await getVideoByUserIdAndType({userid, type})
     userLike.value = post.info

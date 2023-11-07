@@ -29,6 +29,7 @@ declare module 'vue' {
     ElRadioGroup: typeof import('element-plus/es')['ElRadioGroup']
     ElRow: typeof import('element-plus/es')['ElRow']
     ElTag: typeof import('element-plus/es')['ElTag']
+    ElText: typeof import('element-plus/es')['ElText']
     IconButton: typeof import('./src/components/common/IconButton.vue')['default']
     LikeButton: typeof import('./src/components/common/LikeButton.vue')['default']
     LoginAvatar: typeof import('./src/components/common/LoginAvatar.vue')['default']
