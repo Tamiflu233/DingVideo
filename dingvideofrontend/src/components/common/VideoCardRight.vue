@@ -77,9 +77,9 @@
       
     </div>
     <div class="bottomArea">
-      <!-- 评论区结束 -->
-      <el-divider/>
-      <!-- 对视频的互动按钮已放在了视频侧面 -->
+<!--      &lt;!&ndash; 评论区结束 &ndash;&gt;-->
+<!--      <el-divider/>-->
+<!--      &lt;!&ndash; 对视频的互动按钮已放在了视频侧面 &ndash;&gt;-->
 <!--      <div class="buttonArea">-->
 <!--        <el-row class="button-row">-->
 <!--          <el-button link class="warp" @click="doSomething('like', videoInfo)" :disabled="review">-->
@@ -111,7 +111,7 @@
 <!--        </el-row>-->
 <!--      </div>-->
       <el-input
-          v-model="content" class="comment-input my" type="text" placeholder="说点什么..." ref="commentInput"
+          v-model="content" class="comment-input my" type="text" placeholder="说点什么吧..." ref="commentInput"
           :prefix-icon="Edit" @keyup.enter="sendComment(videoInfo, to)" clearable style="margin-top: 5px"
           :disabled="review"
       />
@@ -211,7 +211,7 @@ const load = async () => {
   margin-bottom: 10px;
 }
 .empty-hint {
-  
+  height: 100%;
 }
 .bottomArea {
   position: absolute;
@@ -220,7 +220,6 @@ const load = async () => {
   right: 20px;
 }
 .main-content {
-  height: 420px;
   overflow-y: scroll;
   text-align: left;
 }
@@ -233,5 +232,13 @@ const load = async () => {
   white-space: pre-wrap;
   overflow-wrap: break-word;
   text-align: left;
+}
+
+.comment-input {
+  position: relative;
+  bottom: 1.5em;
+  height: 30px;
+  width: 500px;
+  border-radius: 95px;
 }
 </style>
