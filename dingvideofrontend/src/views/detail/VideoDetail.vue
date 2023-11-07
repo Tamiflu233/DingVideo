@@ -29,17 +29,7 @@ const index = ref(parseInt(route.params.index as string))
 const kind = ref(route.params.kind as String)
 const VideoSwipe = defineAsyncComponent(() => import("@/components/common/VideoSwipe.vue"))
 
-// // 接受传入的视频列表和当前页号
-// const props = defineProps({
-//   videos: {
-//     type: Array as PropType<VideoDetail[]>,
-//     required: true
-//   },
-//   current : {
-//     type: Number,
-//     default: 0
-//   }
-// })
+
 function handleClick() {
   router.back()
 }
