@@ -7,7 +7,7 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://101.132.188.137:3306/ding_video?serverTimezoneUTC&useUnicode=true&characterEncoding=UTF-8
+    url: jdbc:mysql://localhost:3306/ding_video?serverTimezoneUTC&useUnicode=true&characterEncoding=UTF-8
     username: root
     password: Dase1101
   jpa:
@@ -29,4 +29,4 @@ spring:
     timeout: 10000
   data:
     mongodb:
-      uri: mongodb://tamiflu233:Dase1101@101.132.188.137:27017/ding_video
+      uri: mongodb://tamiflu233:Dase1101@localhost:27017/ding_video
